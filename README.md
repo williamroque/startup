@@ -1,5 +1,7 @@
 # Gardens of Ink
 
+![Banner](banner.png)
+
 [My Notes](notes.md)
 
 The writing system of Japan, so rich with depth and meaning, can take the extraordinary sights that surround an author and trap them into a single character. In this peaceful game, take the roles of calligrapher, painter, and gardener all at once as you liberate the mystic forms of Japanese kanji onto a canvas. Come with no knowledge of Japanese art and writing, leave with an appreciation of their beauty.
