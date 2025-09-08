@@ -31,14 +31,14 @@ You cannot write either too slowly or too quickly, with too much pressure or wit
 
 ### Design
 
-![Design image 1](./Assets/Design/1.png)
-![Design image 2](./Assets/Design/2.png)
-![Design image 3](./Assets/Design/3.png)
-![Design image 4](./Assets/Design/4.png)
-![Design image 5](./Assets/Design/5.png)
-![Design image 6](./Assets/Design/6.png)
-![Design image 7](./Assets/Design/7.png)
-![Design image 8](./Assets/Design/8.png)
+<img src="./Assets/Design/1.png" width="80">
+<img src="./Assets/Design/2.png" width="80">
+<img src="./Assets/Design/3.png" width="80">
+<img src="./Assets/Design/4.png" width="80">
+<img src="./Assets/Design/5.png" width="80">
+<img src="./Assets/Design/6.png" width="80">
+<img src="./Assets/Design/7.png" width="80">
+<img src="./Assets/Design/8.png" width="80">
 
 ### Key features
 
