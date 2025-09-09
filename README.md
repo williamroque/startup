@@ -62,6 +62,7 @@ You should write neither too slowly nor too quickly. You should take care not to
       <img src="./Assets/Design/8.png" width="200">
     </td>
     <td>
+      <img src="./Assets/Design/9.png" width="200">
     </td>
   </tr>
 </table>
