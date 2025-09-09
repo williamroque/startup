@@ -27,7 +27,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-You cannot write either too slowly or too quickly, with too much pressure or with too little. You must be fully present in heart and mind, but both must also be completely empty. You should express your deepest passions, but they should flow out easily and effortlessly. You must always correct your technique, but you only ever get one chance to do anything―a brush stroke is irreversible. Many believe that the traditional way of writing is a path to enlightenment. I am making a game where you can mix and explore Japanese characters, use them to assemble tranquil gardens, and share your creations with the world.
+You should write neither too slowly nor too quickly. You should take care not to use too much pressure or too little. You must be fully present in heart and mind, but both must also be completely empty. You ought to express your deepest passions, but they should flow out easily and effortlessly. You must always correct your technique, but you only ever get one chance to do anything―a brush stroke is irreversible. Many believe that the traditional way of writing is a path to enlightenment. I am making a game where you can mix and explore Japanese characters, use them to assemble tranquil gardens, and share your creations with the world.
 
 ### Design
 
@@ -94,7 +94,7 @@ I am going to use the required technologies in the following ways.
 
 - **HTML** - Used to develop the structure and inputs for the app. I intend this to be an SPA, so there will only be one HTML file.
 - **CSS** - Used to style everything from the tab bar to the user list. Should look good on different screen sizes and look simple and clean in general.
-  - **React** - The main bulk of the work is done here, with interactive components, tabs, game logic, rendering assets, calling the API, etc.
+- **React** - The main bulk of the work is done here, with interactive components, tabs, game logic, rendering assets, calling the API, etc.
 - **Service** - Backend service with endpoints for:
   - Login
   - Storing and retrieving user galleries
