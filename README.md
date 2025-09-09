@@ -31,14 +31,40 @@ You cannot write either too slowly or too quickly, with too much pressure or wit
 
 ### Design
 
-<img src="./Assets/Design/1.png" width="80">
-<img src="./Assets/Design/2.png" width="80">
-<img src="./Assets/Design/3.png" width="80">
-<img src="./Assets/Design/4.png" width="80">
-<img src="./Assets/Design/5.png" width="80">
-<img src="./Assets/Design/6.png" width="80">
-<img src="./Assets/Design/7.png" width="80">
-<img src="./Assets/Design/8.png" width="80">
+<table>
+  <tr>
+    <td>
+      <img src="./Assets/Design/1.png" width="200">
+    </td>
+    <td>
+      <img src="./Assets/Design/2.png" width="200">
+    </td>
+    <td>
+      <img src="./Assets/Design/3.png" width="200">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./Assets/Design/4.png" width="200">
+    </td>
+    <td>
+      <img src="./Assets/Design/5.png" width="200">
+    </td>
+    <td>
+      <img src="./Assets/Design/6.png" width="200">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./Assets/Design/7.png" width="200">
+    </td>
+    <td>
+      <img src="./Assets/Design/8.png" width="200">
+    </td>
+    <td>
+    </td>
+  </tr>
+</table>
 
 ### Key features
 
