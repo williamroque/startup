@@ -113,15 +113,24 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages**
+  - I added the following pages: `definition.html`, `discover.html`, `gallery.html`, `index.html`, `studio.html`, `visit_gallery.html`, and `visit.html`
+- [x] **Proper HTML element usage**
+  - I made use of valid HTML syntax, seeking to use semantically meaningful tags and containers
+- [x] **Links**
+  - There are hyperlinks to every page (including an external link to my GitHub repository)
+- [x] **Text**
+  - There is sample text where there will eventually be data
+- [x] **3rd party API placeholder**
+  - I included the API placeholder in `definition.html`, where the sample video will be replaced with a character stroke order guide
+- [x] **Images**
+  - All image assets were included as appropriate
+- [x] **Login placeholder**
+  - The login placeholder is included in `index.html`
+- [x] **DB data placeholder**
+  - The user's personal gallery, dictionary, and other users' galleries will all be filled in with the DB data
+- [x] **WebSocket placeholder**
+  - An indicator in `gallery.html` shows when a user is visiting your personal gallery
 
 ## 🚀 CSS deliverable
 
