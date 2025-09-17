@@ -27,7 +27,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-You should write neither too slowly nor too quickly. You should take care not to use too much pressure or too little. You must be fully present in heart and mind, but both must also be completely empty. You ought to express your deepest passions, but they should flow out easily and effortlessly. You must always correct your technique, but you only ever get one chance to do anything―a brush stroke is irreversible. Many believe that the traditional way of writing is a path to enlightenment. I am making a game where you can mix and explore Japanese characters, use them to assemble tranquil gardens, and share your creations with the world.
+You should write neither too slowly nor too quickly. Apply neither too much pressure nor too little. Be fully present in heart and mind, yet let both remain completely empty. Express your deepest passions, but allow them to flow out easily and effortlessly. Always strive to refine your technique, but remember: a brush stroke is irreversible. Many believe that this traditional way of writing is itself a path to enlightenment. I am creating a game where you can explore and combine Japanese characters, use them to shape tranquil gardens, and share your creations with the world.
 
 ### Design
 
