@@ -12,11 +12,13 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 header {
     display: flex;
     height: 90px;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
@@ -61,6 +63,7 @@ main {
     flex: 1;
     flex-direction: column;
     align-items: center;
+    width: 80%;
 }
 
 footer {
@@ -75,8 +78,57 @@ footer a, footer a:visited {
     color: #2A7FFF;
 }
 
+h1 {
+    color: #212121;
+    font-size: 25pt;
+    text-align: left;
+    font-weight: 400;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+form input {
+    font-size: 12pt;
+    padding: 15px 15px;
+    border: none;
+    border: solid 2px #ccc;
+    border-radius: 7px;
+    outline: none;
+}
+
+form input:focus {
+    border: solid 2px #888;
+}
+
+form p {
+    color: #E57373;
+    display: none;
+}
+
+form button {
+    background: black;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    padding: 18px;
+}
+
+form button:first-of-type {
+    margin-top: 10px;
+}
+
 @media screen and (min-width: 600px) {
     nav {
+        width: 500px;
+    }
+
+    main {
         width: 500px;
     }
 
