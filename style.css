@@ -111,16 +111,21 @@ form p {
     display: none;
 }
 
+form div.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+}
+
 form button {
     background: black;
     border: none;
     color: white;
     text-transform: uppercase;
     padding: 18px;
-}
-
-form button:first-of-type {
-    margin-top: 10px;
+    height: 100%;
+    flex: 1;
 }
 
 @media screen and (min-width: 600px) {
@@ -136,5 +141,9 @@ form button:first-of-type {
         display: inline;
         font-size: 10pt;
         text-transform: uppercase;
+    }
+
+    form div.form-buttons {
+        flex-direction: row;
     }
 }
