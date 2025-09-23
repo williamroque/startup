@@ -21,6 +21,10 @@ header {
     width: 100%;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    border-bottom: solid 2px #ccc;
+    background: white;
 }
 
 nav {
@@ -65,13 +69,20 @@ main {
     flex-direction: column;
     align-items: center;
     width: 80%;
+    padding: 90px 0;
 }
 
 footer {
     display: flex;
     height: 50px;
+    width: 100%;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    bottom: 0;
+    background: white;
+    border-top: solid 1px #ccc;
+    background: white;
 }
 
 footer a, footer a:visited {
@@ -85,6 +96,24 @@ h1 {
     text-align: left;
     font-weight: 400;
     width: 100%;
+}
+
+h2 {
+    color: #212121;
+    font-size: 15pt;
+    text-align: left;
+    font-weight: 400;
+    width: 100%;
+    margin: 0;
+}
+
+div#gallery-visit-indicator {
+    color: #212121;
+    font-size: 12pt;
+    text-align: left;
+    font-weight: 400;
+    width: 100%;
+    margin-top: 20px;
 }
 
 form {
@@ -127,6 +156,21 @@ form button {
     padding: 18px;
     height: 100%;
     flex: 1;
+}
+
+section {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+    gap: 15px;
+}
+
+section div.gallery-row {
+    width: 100%;
+    margin-top: 15px;
 }
 
 @media screen and (min-width: 600px) {
