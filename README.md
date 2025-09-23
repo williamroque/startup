@@ -136,12 +136,18 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body**
+  - I made a fixed header and footer for all pages and styled the main content body
+- [x] **Navigation elements**
+  - I styled all navigation elements
+- [x] **Responsive to window resizing**
+  - The design changes responsively (mobile-first pattern)
+- [x] **Application elements**
+  - All elements have been styled as initially designed
+- [x] **Application text content**
+  - All text content has been styled and fonts are being imported from Google Fonts
+- [x] **Application images**
+  - All application images have been styled (specific assets will be loaded dynamically, but styling has already been added for them)
 
 ## 🚀 React part 1: Routing deliverable
 

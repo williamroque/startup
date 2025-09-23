@@ -4,6 +4,10 @@
     user-select: none;
 }
 
+a {
+    outline: none;
+}
+
 html, body {
     padding: 0;
     margin: 0;
