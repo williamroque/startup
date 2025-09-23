@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Yuji+Syuku&family=Zen+Old+Mincho&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yuji+Syuku&family=Zen+Old+Mincho&display=swap');
+
 * {
     user-select: none;
 }
@@ -98,6 +99,7 @@ h1 {
     text-align: left;
     font-weight: 400;
     width: 100%;
+    margin-bottom: 0;
 }
 
 h2 {
@@ -106,7 +108,8 @@ h2 {
     text-align: left;
     font-weight: 400;
     width: 100%;
-    margin: 0;
+    margin-top: 13px;
+    margin-bottom: 0;
 }
 
 form {
@@ -193,7 +196,7 @@ section {
     justify-content: center;
     align-items: center;
     font-family: 'Zen Old Mincho';
-    font-size: 18pt;
+    font-size: 130%;
     letter-spacing: 5px;
     color: #D4AF37;
 }
@@ -219,6 +222,33 @@ canvas {
     box-sizing: border-box;
 }
 
+.studio-input-table {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 7vw;
+}
+
+.studio-input-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.studio-input-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ccc;
+    border-radius: 10px;
+    width: 30%;
+    aspect-ratio: 1;
+    color: white;
+    font-family: 'Noto Sans JP';
+    font-size: 18pt;
+}
+
+
 @media screen and (min-width: 600px) {
     nav {
         width: 500px;
@@ -236,5 +266,18 @@ canvas {
 
     form div.form-buttons {
         flex-direction: row;
+    }
+
+    .studio-input-table {
+        gap: 3vw;
+    }
+
+    .studio-input-row {
+        justify-content: center;
+        gap: 3vw;
+    }
+
+    .studio-input-box {
+        width: 90px;
     }
 }
