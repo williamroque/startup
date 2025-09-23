@@ -288,6 +288,25 @@ canvas {
     color: #555;
 }
 
+.return-button {
+    position: fixed;
+    top: 2vw;
+    left: 2vw;
+    height: 60px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.return-button img {
+    width: 100%;
+}
+
+.spacer {
+    flex: 1;
+}
+
 @media screen and (min-width: 600px) {
     nav {
         width: 500px;
