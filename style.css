@@ -125,7 +125,7 @@ form {
 }
 
 form input {
-    font-size: 12pt;
+    font-size: 100%;
     padding: 15px 15px;
     border: none;
     border: solid 2px #ccc;
@@ -157,6 +157,7 @@ form button {
     padding: 18px;
     height: 100%;
     flex: 1;
+    font-size: 90%;
 }
 
 section {
