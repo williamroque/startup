@@ -107,15 +107,6 @@ h2 {
     margin: 0;
 }
 
-div#gallery-visit-indicator {
-    color: #212121;
-    font-size: 12pt;
-    text-align: left;
-    font-weight: 400;
-    width: 100%;
-    margin-top: 20px;
-}
-
 form {
     display: flex;
     flex-direction: column;
@@ -168,9 +159,30 @@ section {
     gap: 15px;
 }
 
-section div.gallery-row {
+#gallery-visit-indicator {
+    color: #212121;
+    font-size: 12pt;
+    text-align: left;
+    font-weight: 400;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.gallery-row {
     width: 100%;
     margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+canvas {
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    background: #EDE3D2;
+    box-shadow: 0 0 0 4px #A89A82;
+    border: solid 7px white;
+    box-sizing: border-box;
 }
 
 @media screen and (min-width: 600px) {
