@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, NavLink, Routes, Route } from 'react-router-dom';
 
 import Login from './login/Login';
+import Gallery from './gallery/Gallery';
 
 import './app.css';
 
@@ -31,6 +32,7 @@ export default function App() {
 
             <Routes>
                 <Route path="/" element={<Login />} />
+                <Route path="/gallery" element={<Gallery />} />
             </Routes>
 
             <footer>
