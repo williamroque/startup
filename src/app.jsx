@@ -3,6 +3,7 @@ import { BrowserRouter, NavLink, Routes, Route } from 'react-router-dom';
 
 import Login from './login/Login';
 import Gallery from './gallery/Gallery';
+import Studio from './studio/Studio';
 
 import './app.css';
 
@@ -33,6 +34,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/gallery" element={<Gallery />} />
+                <Route path="/studio" element={<Studio />} />
             </Routes>
 
             <footer>

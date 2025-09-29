@@ -1,32 +1,7 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <title>Studio</title>
-        <link href="style.css" rel="stylesheet"/>
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <a href="gallery.html">
-                    <img src="./assets/icons/gallery.svg"></img>
-                    <span>Gallery</span>
-                </a>
-                <a href="studio.html" class="active">
-                    <img src="./assets/icons/studio.svg"/>
-                    <span>Studio</span>
-                </a>
-                <a href="discover.html">
-                    <span>化</span>
-                    <span>Discover</span>
-                </a>
-                <a href="visit.html">
-                    <img src="./assets/icons/visit.svg"/>
-                    <span>Visit</span>
-                </a>
-            </nav>
-        </header>
+import React from 'react';
+
+export default function Studio() {
+    return (
         <main>
             <h1>Studio</h1>
             <section>
@@ -42,7 +17,7 @@
                         <div class="studio-input-box">5</div>
                         <div class="studio-input-box">水</div>
                     </div>
-                </table>
+                </div>
             </section>
             <section>
                 <h2>Dictionary</h2>
@@ -74,8 +49,5 @@
                 </ul>
             </section>
         </main>
-        <footer>
-            William Roque | <a href="https://github.com/williamroque/startup/">GitHub</a>
-        </footer>
-    </body>
-</html>
+    );
+}
