@@ -1,4 +1,5 @@
 import React from 'react';
+import './Visit.css';
 
 export default function Visit() {
     return (
