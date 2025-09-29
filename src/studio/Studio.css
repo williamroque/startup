@@ -1,0 +1,25 @@
+.studio-input-table {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 7vw;
+}
+
+.studio-input-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.studio-input-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ccc;
+    border-radius: 10px;
+    width: 30%;
+    aspect-ratio: 1;
+    color: white;
+    font-family: 'Noto Sans JP';
+    font-size: 18pt;
+}

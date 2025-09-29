@@ -1,4 +1,5 @@
 import React from 'react';
+import './Studio.css';
 
 export default function Studio() {
     return (
