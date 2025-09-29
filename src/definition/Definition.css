@@ -1,0 +1,29 @@
+.definition-main {
+    padding: 50px 0;
+}
+
+.definition-container {
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -10px;
+}
+
+.definition-image {
+    height: 100%    ;
+    opacity: 0.5;
+}
+
+.definition-image-label {
+    position: absolute;
+    font-family: 'Yuji Syuku';
+    font-size: 48pt;
+    color: #333;
+}
+
+.definition-translation-label {
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    color: #212121;
+}

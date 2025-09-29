@@ -1,4 +1,7 @@
 import React from 'react';
+
+import './Discover.css';
+
 import Dictionary from '../dictionary/Dictionary';
 
 export default function Discover() {

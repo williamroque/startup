@@ -1,0 +1,47 @@
+.discover-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.discover-button-span {
+    font-family: 'Yuji Syuku';
+    font-size: 110%;
+}
+
+.discover-button {
+    width: 100%;
+    height: 50px;
+    background: black;
+    border: none;
+    text-transform: uppercase;
+    color: white;
+    font-family: 'Roboto';
+    font-size: 90%;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.discover-pedestals {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.discover-pedestal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background: black;
+    border: none;
+    text-transform: uppercase;
+    color: white;
+    font-family: 'Yuji Syuku';
+    font-size: 120%;
+    border-radius: 7px;
+}
