@@ -7,6 +7,7 @@ import Studio from './studio/Studio';
 import Definition from './definition/Definition';
 import Discover from './discover/Discover';
 import Visit from './visit/Visit';
+import VisitGallery from './visit/VisitGallery';
 
 import './app.css';
 
@@ -15,7 +16,7 @@ export default function App() {
 
     return (
         <div id="app">
-            { pathname !== '/definition' ? (
+            { pathname !== '/definition' && pathname !== '/visit-gallery' ? (
                 <header>
                     <nav>
                         <NavLink to="gallery" className="nav-link">
@@ -45,6 +46,7 @@ export default function App() {
                 <Route path="/definition" element={<Definition />} />
                 <Route path="/discover" element={<Discover />} />
                 <Route path="/visit" element={<Visit />} />
+                <Route path="/visit-gallery" element={<VisitGallery />} />
             </Routes>
 
             <footer>
