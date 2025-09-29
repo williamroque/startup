@@ -1,5 +1,7 @@
 import React from 'react';
+
 import './Studio.css';
+import Dictionary from '../dictionary/Dictionary';
 
 export default function Studio() {
     return (
@@ -20,35 +22,7 @@ export default function Studio() {
                     </div>
                 </div>
             </section>
-            <section>
-                <h2>Dictionary</h2>
-                <ul class="dictionary-list">
-                    <li>
-                        <a href="definition">
-                            <span class="definition-character">石</span>
-                            <span class="definition-label">Stone</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="definition">
-                            <span class="definition-character">家</span>
-                            <span class="definition-label">House</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="definition">
-                            <span class="definition-character">水</span>
-                            <span class="definition-label">Water</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="definition">
-                            <span class="definition-character">川</span>
-                            <span class="definition-label">River</span>
-                        </a>
-                    </li>
-                </ul>
-            </section>
+            <Dictionary />
         </main>
     );
 }
