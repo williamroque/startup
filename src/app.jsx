@@ -6,6 +6,7 @@ import Gallery from './gallery/Gallery';
 import Studio from './studio/Studio';
 import Definition from './definition/Definition';
 import Discover from './discover/Discover';
+import Visit from './visit/Visit';
 
 import './app.css';
 
@@ -43,6 +44,7 @@ export default function App() {
                 <Route path="/studio" element={<Studio />} />
                 <Route path="/definition" element={<Definition />} />
                 <Route path="/discover" element={<Discover />} />
+                <Route path="/visit" element={<Visit />} />
             </Routes>
 
             <footer>
