@@ -8,7 +8,7 @@ a {
     outline: none;
 }
 
-html, body, #root {
+html, body, #root, #app {
     padding: 0;
     margin: 0;
     width: 100%;
@@ -16,7 +16,7 @@ html, body, #root {
     font-family: Roboto, Helvetica, sans-serif;
 }
 
-body, #root {
+body, #root, #app {
     display: flex;
     flex-direction: column;
     align-items: center;
