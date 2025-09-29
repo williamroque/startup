@@ -1,0 +1,39 @@
+.dictionary-list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    width: 100%;
+    gap: 15px;
+    padding: 0;
+}
+
+.dictionary-list li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ddd;
+    border-radius: 10px;
+    height: 50px;
+}
+
+.dictionary-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    padding: 30px;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+    font-size: 13pt;
+}
+
+.definition-character {
+    font-family: 'Zen Old Mincho';
+}
+
+.definition-label {
+    color: #555;
+}
