@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, NavLink, Router, Routes } from 'react-router-dom';
+import { BrowserRouter, NavLink, Routes, Route } from 'react-router-dom';
+
+import Login from './login/Login';
 
 import './app.css';
 
@@ -8,24 +10,29 @@ export default function App() {
         <BrowserRouter>
             <header>
                 <nav>
-                    <a href="gallery.html">
+                    <NavLink to="gallery" className="nav-link">
                         <img src="./assets/icons/gallery.svg"></img>
                         <span>Gallery</span>
-                    </a>
-                    <a href="studio.html">
+                    </NavLink>
+                    <NavLink to="studio" className="nav-link">
                         <img src="./assets/icons/studio.svg" />
                         <span>Studio</span>
-                    </a>
-                    <a href="discover.html">
+                    </NavLink>
+                    <NavLink to="discover" className="nav-link">
                         <span>化</span>
                         <span>Discover</span>
-                    </a>
-                    <a href="visit.html">
+                    </NavLink>
+                    <NavLink to="visit" className="nav-link">
                         <img src="./assets/icons/visit.svg" />
                         <span>Visit</span>
-                    </a>
+                    </NavLink>
                 </nav>
             </header>
+
+            <Routes>
+                <Route path="/" element={<Login />} />
+            </Routes>
+
             <footer>
                 William Roque | <a href="https://github.com/williamroque/startup/">GitHub</a>
             </footer>

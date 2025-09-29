@@ -1,0 +1,43 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+form input {
+    font-size: 100%;
+    padding: 15px 15px;
+    border: none;
+    border: solid 2px #ccc;
+    border-radius: 7px;
+    outline: none;
+}
+
+form input:focus {
+    border: solid 2px #888;
+}
+
+form p {
+    color: #E57373;
+    display: none;
+}
+
+form div.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form button {
+    background: black;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    padding: 18px;
+    height: 100%;
+    flex: 1;
+    font-size: 90%;
+}
