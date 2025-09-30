@@ -34,35 +34,35 @@ You should write neither too slowly nor too quickly. Apply neither too much pres
 <table>
   <tr>
     <td>
-      <img src="./assets/Design/1.png" width="200">
+      <img src="./src/assets/Design/1.png" width="200">
     </td>
     <td>
-      <img src="./assets/Design/2.png" width="200">
+      <img src="./src/assets/Design/2.png" width="200">
     </td>
     <td>
-      <img src="./assets/Design/3.png" width="200">
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="./assets/Design/4.png" width="200">
-    </td>
-    <td>
-      <img src="./assets/Design/5.png" width="200">
-    </td>
-    <td>
-      <img src="./assets/Design/6.png" width="200">
+      <img src="./src/assets/Design/3.png" width="200">
     </td>
   </tr>
   <tr>
     <td>
-      <img src="./assets/Design/7.png" width="200">
+      <img src="./src/assets/Design/4.png" width="200">
     </td>
     <td>
-      <img src="./assets/Design/8.png" width="200">
+      <img src="./src/assets/Design/5.png" width="200">
     </td>
     <td>
-      <img src="./assets/Design/9.png" width="200">
+      <img src="./src/assets/Design/6.png" width="200">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="./src/assets/Design/7.png" width="200">
+    </td>
+    <td>
+      <img src="./src/assets/Design/8.png" width="200">
+    </td>
+    <td>
+      <img src="./src/assets/Design/9.png" width="200">
     </td>
   </tr>
 </table>
