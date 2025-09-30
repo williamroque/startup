@@ -9,6 +9,10 @@ import Discover from './discover/Discover';
 import Visit from './visit/Visit';
 import VisitGallery from './visit/VisitGallery';
 
+import galleryIcon from './assets/icons/gallery.svg';
+import studioIcon from './assets/icons/studio.svg';
+import visitIcon from './assets/icons/visit.svg';
+
 import './app.css';
 
 export default function App() {
@@ -20,11 +24,11 @@ export default function App() {
                 <header>
                     <nav>
                         <NavLink to="gallery" className="nav-link">
-                            <img src="./assets/icons/gallery.svg"></img>
+                            <img src={ galleryIcon }></img>
                             <span>Gallery</span>
                         </NavLink>
                         <NavLink to="studio" className="nav-link">
-                            <img src="./assets/icons/studio.svg" />
+                            <img src={ studioIcon }/>
                             <span>Studio</span>
                         </NavLink>
                         <NavLink to="discover" className="nav-link">
@@ -32,7 +36,7 @@ export default function App() {
                             <span>Discover</span>
                         </NavLink>
                         <NavLink to="visit" className="nav-link">
-                            <img src="./assets/icons/visit.svg" />
+                            <img src={ visitIcon } />
                             <span>Visit</span>
                         </NavLink>
                     </nav>

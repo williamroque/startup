@@ -1,10 +1,12 @@
 import React from 'react';
 
+import arrowBack from '../assets/icons/arrow_back.svg';
+
 export default function VisitGallery() {
     return (
         <main>
             <button className="return-button" onClick={() => window.location.href = 'visit'}>
-                <img src="./assets/icons/arrow_back.svg" />
+                <img src={ arrowBack } />
             </button>
             <h1>Gallery</h1>
             <h2>by <i>robbysmith</i></h2>

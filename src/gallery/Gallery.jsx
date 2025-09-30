@@ -1,6 +1,8 @@
 import './Gallery.css';
 import React from 'react';
 
+import closeIcon from '../assets/icons/close.svg';
+
 export default function Gallery() {
     return (
         <main>
@@ -13,7 +15,7 @@ export default function Gallery() {
                     <div className="gallery-controls">
                         <div className="gallery-label">家石水</div>
                         <button className="gallery-delete">
-                            <img src="./assets/icons/close.svg"></img>
+                            <img src={ closeIcon }></img>
                         </button>
                     </div>
                 </div>
@@ -22,7 +24,7 @@ export default function Gallery() {
                     <div className="gallery-controls">
                         <div className="gallery-label">川人</div>
                         <button className="gallery-delete">
-                            <img src="./assets/icons/close.svg"></img>
+                            <img src={ closeIcon }></img>
                         </button>
                     </div>
                 </div>
