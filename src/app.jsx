@@ -82,12 +82,16 @@ export default function App() {
                 <Route
                     path="*"
                     element={
-                        <Login
-                            onAuthStateChange={(username, authState) => {
-                                setUsername(username);
-                                setAuthState(authState);
-                            }}
-                        />
+                        authState === AuthState.Authenticated ? (
+                            <Gallery username={ username } />
+                        ) : (
+                            <Login
+                                onAuthStateChange={(username, authState) => {
+                                    setUsername(username);
+                                    setAuthState(authState);
+                                }}
+                            />
+                        )
                     }
                 />
             </Routes>
