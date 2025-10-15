@@ -3,11 +3,11 @@ import React from 'react';
 
 import closeIcon from '../assets/icons/close.svg';
 
-export default function Gallery() {
+export default function Gallery({ username }) {
     return (
         <main>
             <h1>Gallery</h1>
-            <h2>Welcome back, <i>wroque-san</i></h2>
+            <h2>Welcome back, <i>{ username}-san</i></h2>
             <div id="gallery-visit-indicator"><i>robbysmith</i> just visited your gallery.</div>
             <section>
                 <div className="gallery-row">

@@ -71,7 +71,7 @@ export default function App() {
             <Routes>
                 { authState === AuthState.Authenticated ? (
                     <>
-                        <Route path="/gallery" element={<Gallery />} />
+                        <Route path="/gallery" element={<Gallery username={ username } />} />
                         <Route path="/studio" element={<Studio />} />
                         <Route path="/definition" element={<Definition />} />
                         <Route path="/discover" element={<Discover />} />
