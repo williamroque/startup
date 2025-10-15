@@ -1,8 +1,9 @@
 import useImage from '../assets/useImage';
 
 export class Item {
-    constructor (itemType) {
+    constructor(itemType, itemCharacter) {
         this._itemType = itemType;
+        this._itemCharacter = itemCharacter;
     }
 
     render() {
@@ -21,6 +22,12 @@ export class Frame {
 
     addItem(item, position) {
         this._items[position] = item;
+    }
+
+    getLabel() {
+        return Object.values(this._items).map(
+            item => item._itemCharacter
+        ).join('');
     }
 }
 
