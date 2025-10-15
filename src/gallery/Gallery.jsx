@@ -1,12 +1,90 @@
 import './Gallery.css';
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 import { Frame, Item } from '../data/galleryData';
 
 import closeIcon from '../assets/icons/close.svg';
 
+const positionNudges = {
+    'top-left': [0.1, 0.1],
+    'top-middle': [0, 0.2],
+    'top-right': [-0.1, 0.1],
+    'bottom-left': [0.1, -0.1],
+    'bottom-middle': [-0.05, -0.2],
+    'bottom-right': [-0.1, -0.2]
+};
+
+
+function GalleryItem({ position, item, frameSize }) {
+    const { loading, image } = item.getImage();
+
+    const [ width, height ] = frameSize;
+
+    const assetSize = 90;
+
+    const positionNudge = positionNudges[position];
+
+    let [ x, y ] = [
+        positionNudge[0] * width,
+        positionNudge[1] * height
+    ];
+
+    switch (position) {
+        case 'top-middle':
+            x += width / 2 - assetSize / 2;
+            break;
+        case 'top-right':
+            x += width - assetSize;
+            break;
+        case 'bottom-left':
+            y += height - assetSize;
+            break;
+        case 'bottom-middle':
+            x += width / 2 - assetSize / 2;
+            y += height - assetSize;
+            break;
+        case 'bottom-right':
+            x += width - assetSize;
+            y += height - assetSize;
+            break;
+    }
+
+    return loading ? '' : (
+        <img
+            className="frame-item"
+            src={image}
+            style={{
+                left: x,
+                top: y,
+                height: assetSize
+            }}
+        />
+    );
+}
+
 function GalleryCanvas({ frame }) {
-    return <canvas></canvas>;
+    const ref = useRef(null);
+    const [frameSize, setFrameSize] = useState([0, 0]);
+
+    useEffect(() => {
+        setFrameSize([
+            ref.current.offsetWidth,
+            ref.current.offsetHeight
+        ]);
+    }, [ref.current]);
+
+    return (
+        <div className="frame" ref={ref}>
+            { frame.getItems().map(([ position, item ], index) => {
+                return <GalleryItem
+                    key={index}
+                    position={position}
+                    item={item}
+                    frameSize={frameSize}
+                />;
+            }) }
+        </div>
+    );
 }
 
 function GalleryControls({ label }) {
@@ -34,6 +112,10 @@ function GalleryRow({ frame }) {
 const samples = [
     new Frame({
         'top-left': new Item('river', '川'),
+        'top-middle': new Item('house', '家'),
+        'top-right': new Item('flower', '花'),
+        'bottom-left': new Item('stone', '石'),
+        'bottom-middle': new Item('temple', '寺'),
         'bottom-right': new Item('person', '人'),
     })
 ];

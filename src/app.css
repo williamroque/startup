@@ -126,12 +126,17 @@ section {
     gap: 15px;
 }
 
-canvas {
+.frame {
     width: 100%;
     aspect-ratio: 5 / 4;
     background: #EDE3D2;
     border: solid 4px #A89A82;
     box-sizing: border-box;
+    position: relative;
+}
+
+.frame-item {
+    position: absolute;
 }
 
 .return-button {

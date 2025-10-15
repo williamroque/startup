@@ -6,7 +6,7 @@ export class Item {
         this._itemCharacter = itemCharacter;
     }
 
-    render() {
+    getImage() {
         return useImage(this._itemType);
     }
 }
@@ -22,6 +22,10 @@ export class Frame {
 
     addItem(item, position) {
         this._items[position] = item;
+    }
+
+    getItems() {
+        return Object.entries(this._items);
     }
 
     getLabel() {
