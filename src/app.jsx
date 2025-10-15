@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { NavLink, Routes, Route, useLocation } from 'react-router-dom';
+import { NavLink, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 import AuthState from './login/authState';
 
@@ -15,11 +15,14 @@ import VisitGallery from './visit/VisitGallery';
 import galleryIcon from './assets/icons/gallery.svg';
 import studioIcon from './assets/icons/studio.svg';
 import visitIcon from './assets/icons/visit.svg';
+import logoutIcon from './assets/icons/logout.svg';
 
 import './app.css';
 
 export default function App() {
     const { pathname } = useLocation();
+    const navigate = useNavigate();
+
     const [ username, setUsername ] = useState(
         localStorage.getItem('username')
     );
@@ -48,6 +51,19 @@ export default function App() {
                             <img src={ visitIcon } />
                             <span>Visit</span>
                         </NavLink>
+                        <a
+                            className="nav-link"
+                            onClick={() => {
+                                setUsername('');
+                                localStorage.setItem('username', '');
+                                setAuthState(AuthState.Unauthenticated);
+
+                                navigate('/');
+                            }}
+                        >
+                            <img src={ logoutIcon }></img>
+                            <span>Log out</span>
+                        </a>
                     </nav>
                 </header>
             ) : ''}
