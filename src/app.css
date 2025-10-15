@@ -167,7 +167,7 @@ canvas {
         text-transform: uppercase;
     }
 
-    form div.form-buttons {
+    #form div.form-buttons {
         flex-direction: row;
     }
 
