@@ -129,7 +129,6 @@ section {
 .frame {
     width: 100%;
     aspect-ratio: 5 / 4;
-    background: #EDE3D2;
     border: solid 4px #A89A82;
     box-sizing: border-box;
     position: relative;
@@ -137,6 +136,22 @@ section {
 
 .frame-item {
     position: absolute;
+    object-fit: contain;
+    image-rendering: auto;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.12));
+}
+
+.texture-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        url("https://upload.wikimedia.org/wikipedia/commons/4/47/Kraft_tileable_1024x1024.png");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.38;
+    mix-blend-mode: multiply;
+    filter: contrast(1.05) brightness(1.02);
 }
 
 .return-button {

@@ -6,12 +6,12 @@ import { Frame, Item } from '../data/galleryData';
 import closeIcon from '../assets/icons/close.svg';
 
 const positionNudges = {
-    'top-left': [0.1, 0.1],
+    'top-left': [0.04, 0.02],
     'top-middle': [0, 0.2],
-    'top-right': [-0.1, 0.1],
+    'top-right': [-0.2, 0.1],
     'bottom-left': [0.1, -0.1],
-    'bottom-middle': [-0.05, -0.2],
-    'bottom-right': [-0.1, -0.2]
+    'bottom-middle': [0.01, -0.2],
+    'bottom-right': [-0.01, -0.15]
 };
 
 
@@ -20,7 +20,7 @@ function GalleryItem({ position, item, frameSize }) {
 
     const [ width, height ] = frameSize;
 
-    const assetSize = 90;
+    const assetSize = 110;
 
     const positionNudge = positionNudges[position];
 
@@ -83,6 +83,7 @@ function GalleryCanvas({ frame }) {
                     frameSize={frameSize}
                 />;
             }) }
+            <div className="texture-overlay"></div>
         </div>
     );
 }
@@ -111,11 +112,10 @@ function GalleryRow({ frame }) {
 
 const samples = [
     new Frame({
-        'top-left': new Item('river', '川'),
+        'bottom-middle': new Item('river', '川'),
         'top-middle': new Item('house', '家'),
-        'top-right': new Item('flower', '花'),
         'bottom-left': new Item('stone', '石'),
-        'bottom-middle': new Item('temple', '寺'),
+        'top-right': new Item('sky', '空'),
         'bottom-right': new Item('person', '人'),
     })
 ];
