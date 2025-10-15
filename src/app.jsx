@@ -49,8 +49,18 @@ export default function App() {
             ) : ''}
 
             <Routes>
+                { authState === AuthState.Authenticated ? (
+                    <>
+                        <Route path="/gallery" element={<Gallery />} />
+                        <Route path="/studio" element={<Studio />} />
+                        <Route path="/definition" element={<Definition />} />
+                        <Route path="/discover" element={<Discover />} />
+                        <Route path="/visit" element={<Visit />} />
+                        <Route path="/visit-gallery" element={<VisitGallery />} />
+                    </>
+                ) : ''}
                 <Route
-                    path="/"
+                    path="*"
                     element={
                         <Login
                             onAuthStateChange={(username, authState) => {
@@ -60,12 +70,6 @@ export default function App() {
                         />
                     }
                 />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/studio" element={<Studio />} />
-                <Route path="/definition" element={<Definition />} />
-                <Route path="/discover" element={<Discover />} />
-                <Route path="/visit" element={<Visit />} />
-                <Route path="/visit-gallery" element={<VisitGallery />} />
             </Routes>
 
             <footer>
