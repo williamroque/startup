@@ -1,4 +1,4 @@
-class AuthState {
+export default class AuthState {
     static Authenticated = new AuthState('authenticated');
     static Unauthenticated = new AuthState('unauthenticated');
 
