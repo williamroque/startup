@@ -8,10 +8,10 @@ import closeIcon from '../assets/icons/close.svg';
 const positionNudges = {
     'top-left': [0.04, 0.02],
     'top-middle': [0, 0.2],
-    'top-right': [-0.2, 0.1],
+    'top-right': [-0.1, 0.1],
     'bottom-left': [0.1, -0.1],
-    'bottom-middle': [0.01, -0.2],
-    'bottom-right': [-0.01, -0.15]
+    'bottom-middle': [0.02, -0.2],
+    'bottom-right': [-0.07, -0.15]
 };
 
 
@@ -50,15 +50,19 @@ function GalleryItem({ position, item, frameSize }) {
     }
 
     return loading ? '' : (
-        <img
+        <div
             className="frame-item"
-            src={image}
             style={{
                 left: x,
                 top: y,
-                height: assetSize
+                height: assetSize,
+                width: assetSize,
             }}
-        />
+        >
+            <img
+                src={image}
+            />
+        </div>
     );
 }
 
@@ -117,6 +121,11 @@ const samples = [
         'bottom-left': new Item('stone', '石'),
         'top-right': new Item('sky', '空'),
         'bottom-right': new Item('person', '人'),
+    }),
+    new Frame({
+        'bottom-middle': new Item('waterfall', '滝'),
+        'bottom-left': new Item('wood', '木'),
+        'top-right': new Item('water', '木'),
     })
 ];
 
@@ -127,7 +136,9 @@ export default function Gallery({ username }) {
             <h2>Welcome back, <i>{ username}-san</i></h2>
             <div id="gallery-visit-indicator"><i>robbysmith</i> just visited your gallery.</div>
             <section>
-                <GalleryRow frame={samples[0]} />
+                {samples.map(frame => {
+                    return <GalleryRow frame={frame} />
+                })}
             </section>
         </main>
     );
