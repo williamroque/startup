@@ -20,8 +20,12 @@ import './app.css';
 
 export default function App() {
     const { pathname } = useLocation();
-    const [ authState, setAuthState ] = useState(AuthState.Unauthenticated);
-    const [ username, setUsername ] = useState('');
+    const [ username, setUsername ] = useState(
+        localStorage.getItem('username')
+    );
+    const [ authState, setAuthState ] = useState(
+        username ? AuthState.Authenticated : AuthState.Unauthenticated
+    );
 
     return (
         <div id="app">
