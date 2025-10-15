@@ -1,5 +1,8 @@
 import React from 'react';
+import { useState } from 'react';
 import { NavLink, Routes, Route, useLocation } from 'react-router-dom';
+
+import AuthState from './login/authState';
 
 import Login from './login/Login';
 import Gallery from './gallery/Gallery';
@@ -17,10 +20,12 @@ import './app.css';
 
 export default function App() {
     const { pathname } = useLocation();
+    const [ authState, setAuthState ] = useState(AuthState.Unauthenticated);
+    const [ username, setUsername ] = useState('');
 
     return (
         <div id="app">
-            { pathname !== '/definition' && pathname !== '/visit-gallery' ? (
+            { authState === AuthState.Authenticated && pathname !== '/definition' && pathname !== '/visit-gallery' ? (
                 <header>
                     <nav>
                         <NavLink to="gallery" className="nav-link">
@@ -44,7 +49,17 @@ export default function App() {
             ) : ''}
 
             <Routes>
-                <Route path="/" element={<Login />} />
+                <Route
+                    path="/"
+                    element={
+                        <Login
+                            onAuthStateChange={(username, authState) => {
+                                setUsername(username);
+                                setAuthState(authState);
+                            }}
+                        />
+                    }
+                />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/studio" element={<Studio />} />
                 <Route path="/definition" element={<Definition />} />
