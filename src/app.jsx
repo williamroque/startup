@@ -12,7 +12,7 @@ import Discover from './discover/Discover';
 import Visit from './visit/Visit';
 import VisitGallery from './visit/VisitGallery';
 
-import { defaultUserDictionary, UserDictionaryContext } from './data/dictionaryData';
+import { defaultUserDictionary, fromFullDictionary, UserDictionaryContext } from './data/dictionaryData';
 
 import galleryIcon from './assets/icons/gallery.svg';
 import studioIcon from './assets/icons/studio.svg';
@@ -32,7 +32,16 @@ export default function App() {
         username ? AuthState.Authenticated : AuthState.Unauthenticated
     );
 
-    const [ userDictionary, setUserDictionary ] = useState(defaultUserDictionary);
+    let storedDictionary = localStorage.getItem('user-dictionary');
+    if (storedDictionary) {
+        storedDictionary = fromFullDictionary(
+            JSON.parse(storedDictionary)
+        );
+    } else {
+        storedDictionary = defaultUserDictionary;
+    }
+
+    const [ userDictionary, setUserDictionary ] = useState(storedDictionary);
 
     function learnCharacter(character) {
         setUserDictionary(

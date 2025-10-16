@@ -64,6 +64,15 @@ export class DictionaryData {
             }
         }
     }
+
+    save(dictionaryName) {
+        localStorage.setItem(
+            dictionaryName,
+            JSON.stringify(
+                Object.keys(this._characters)
+            )
+        );
+    }
 }
 
 export const fullDictionary = new DictionaryData({
@@ -98,5 +107,15 @@ export const defaultUserDictionary = new DictionaryData({
     '金': new Character('gold', 'Gold', '金', null, 1),
     '火': new Character('fire', 'Fire', '火', null, 1),
 });
+
+export function fromFullDictionary(characters) {
+    const data = {};
+
+    for (const character of characters) {
+        data[character] = fullDictionary.getCharacter(character);
+    }
+
+    return new DictionaryData(data);
+}
 
 export const UserDictionaryContext = createContext();

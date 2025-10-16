@@ -193,7 +193,7 @@ function DiscoverSection() {
     const [ prediction, setPrediction ] = useState(null);
     const [ newCharacter, setNewCharacter ] = useState();
 
-    const { learnCharacter } = useContext(UserDictionaryContext);
+    const { userDictionary, learnCharacter } = useContext(UserDictionaryContext);
 
     useEffect(() => {
         let timer;
@@ -205,7 +205,7 @@ function DiscoverSection() {
         }
 
         return () => clearTimeout(timer);
-    }, newCharacter);
+    }, [newCharacter]);
 
     function clearCanvas() {
         if (canvasRef.current) {
@@ -224,7 +224,9 @@ function DiscoverSection() {
         
         if (character) {
             setNewCharacter(character);
+
             learnCharacter(character);
+            userDictionary.save('user-dictionary');
         }
     }
     
