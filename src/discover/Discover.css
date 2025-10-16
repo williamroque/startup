@@ -66,3 +66,29 @@
     border-radius: 7px;
     box-sizing: border-box;
 }
+
+.new-character-container {
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -10px;
+}
+
+.new-character-image {
+    height: 100%    ;
+    opacity: 0.5;
+}
+
+.new-character-image-label {
+    position: absolute;
+    font-family: 'Yuji Syuku';
+    font-size: 10vh;
+    color: #333;
+}
+
+.new-character-translation-label {
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    color: #212121;
+}

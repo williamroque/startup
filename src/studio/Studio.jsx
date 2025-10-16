@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './Studio.css';
 import Dictionary from '../dictionary/Dictionary';
 import { GalleryCanvas } from '../gallery/Gallery';
 import { Frame } from '../data/galleryData';
-import { fullDictionary } from '../data/dictionaryData';
+import { UserDictionaryContext } from '../data/dictionaryData';
 
 
 function InputBox({ handleChange, position }) {
+    const { userDictionary } = useContext(UserDictionaryContext);
+
     return (
         <select
             className="studio-input-box"
@@ -17,7 +19,7 @@ function InputBox({ handleChange, position }) {
             }}
         >
             <option></option>
-            {fullDictionary.getCharacters().map((character, index) => {
+            {userDictionary.getCharacters().map((character, index) => {
                 return <option key={index}>{character.getCharacter()}</option>;
             })}
         </select>
@@ -41,9 +43,10 @@ export default function Studio() {
     const [ frame, setFrame ] = useState(new Frame());
 
     const navigate = useNavigate();
+    const { userDictionary } = useContext(UserDictionaryContext);
 
     function handleChange(characterName, position) {
-        const character = fullDictionary.getCharacter(characterName);
+        const character = userDictionary.getCharacter(characterName);
         setFrame(frame.swapCharacter(character, position));
     }
 
@@ -64,7 +67,7 @@ export default function Studio() {
                     Save to Gallery
                 </button>
             </section>
-            <Dictionary dictionary={fullDictionary} />
+            <Dictionary dictionary={userDictionary} />
         </main>
     );
 }

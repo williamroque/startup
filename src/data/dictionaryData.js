@@ -1,3 +1,5 @@
+import { createContext } from 'react';
+
 export class Character {
     constructor(id, name, character, combination, sizeFactor) {
         this._id = id;
@@ -22,6 +24,11 @@ export class Character {
     getSizeFactor() {
         return this._sizeFactor;
     }
+
+    testCombination(a, b) {
+        if (!this._combination) return false;
+        return this._combination.indexOf(a) > -1 && this._combination.indexOf(b) > -1;
+    }
 }
 
 export class DictionaryData {
@@ -34,7 +41,8 @@ export class DictionaryData {
     }
 
     learnCharacter(characterObject) {
-        this._characters[character.getCharacter()] = characterObject;
+        this._characters[characterObject.getCharacter()] = characterObject;
+        return new DictionaryData(this._characters);
     }
 
     getCharacter(character) {
@@ -43,6 +51,18 @@ export class DictionaryData {
 
     getCharacters() {
         return Object.values(this._characters);
+    }
+
+    getPlainCharacters() {
+        return Object.keys(this._characters);
+    }
+
+    findCombination(a, b) {
+        for (const character of Object.values(this._characters)) {
+            if (character.testCombination(a, b)) {
+                return character;
+            }
+        }
     }
 }
 
@@ -78,3 +98,5 @@ export const defaultUserDictionary = new DictionaryData({
     '金': new Character('gold', 'Gold', '金', null, 1),
     '火': new Character('fire', 'Fire', '火', null, 1),
 });
+
+export const UserDictionaryContext = createContext();

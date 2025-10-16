@@ -12,6 +12,8 @@ import Discover from './discover/Discover';
 import Visit from './visit/Visit';
 import VisitGallery from './visit/VisitGallery';
 
+import { defaultUserDictionary, UserDictionaryContext } from './data/dictionaryData';
+
 import galleryIcon from './assets/icons/gallery.svg';
 import studioIcon from './assets/icons/studio.svg';
 import visitIcon from './assets/icons/visit.svg';
@@ -30,78 +32,90 @@ export default function App() {
         username ? AuthState.Authenticated : AuthState.Unauthenticated
     );
 
+    const [ userDictionary, setUserDictionary ] = useState(defaultUserDictionary);
+
+    function learnCharacter(character) {
+        setUserDictionary(
+            userDictionary.learnCharacter(character)
+        );
+    }
+
+    const contextValue = { userDictionary, learnCharacter };
+
     return (
-        <div id="app">
-            { authState === AuthState.Authenticated && !pathname.startsWith('/definition') && pathname !== '/visit-gallery' ? (
-                <header>
-                    <nav>
-                        <NavLink to="gallery" className="nav-link">
-                            <img src={ galleryIcon }></img>
-                            <span>Gallery</span>
-                        </NavLink>
-                        <NavLink to="studio" className="nav-link">
-                            <img src={ studioIcon }/>
-                            <span>Studio</span>
-                        </NavLink>
-                        <NavLink to="discover" className="nav-link">
-                            <span>化</span>
-                            <span>Discover</span>
-                        </NavLink>
-                        <NavLink to="visit" className="nav-link">
-                            <img src={ visitIcon } />
-                            <span>Visit</span>
-                        </NavLink>
-                        <a
-                            className="nav-link"
-                            onClick={() => {
-                                setUsername('');
-                                localStorage.setItem('username', '');
-                                setAuthState(AuthState.Unauthenticated);
+        <UserDictionaryContext.Provider value={contextValue}>
+            <div id="app">
+                {authState === AuthState.Authenticated && !pathname.startsWith('/definition') && pathname !== '/visit-gallery' ? (
+                    <header>
+                        <nav>
+                            <NavLink to="gallery" className="nav-link">
+                                <img src={galleryIcon}></img>
+                                <span>Gallery</span>
+                            </NavLink>
+                            <NavLink to="studio" className="nav-link">
+                                <img src={studioIcon} />
+                                <span>Studio</span>
+                            </NavLink>
+                            <NavLink to="discover" className="nav-link">
+                                <span>化</span>
+                                <span>Discover</span>
+                            </NavLink>
+                            <NavLink to="visit" className="nav-link">
+                                <img src={visitIcon} />
+                                <span>Visit</span>
+                            </NavLink>
+                            <a
+                                className="nav-link"
+                                onClick={() => {
+                                    setUsername('');
+                                    localStorage.setItem('username', '');
+                                    setAuthState(AuthState.Unauthenticated);
 
-                                navigate('/');
-                            }}
-                        >
-                            <img src={ logoutIcon }></img>
-                            <span>Log out</span>
-                        </a>
-                    </nav>
-                </header>
-            ) : ''}
-
-            <Routes>
-                { authState === AuthState.Authenticated ? (
-                    <>
-                        <Route path="/gallery" element={<Gallery username={ username } />} />
-                        <Route path="/studio" element={<Studio />} />
-                        <Route path="/definition/:character" element={<Definition />} />
-                        <Route path="/discover" element={<Discover />} />
-                        <Route path="/visit" element={<Visit />} />
-                        <Route path="/visit-gallery" element={<VisitGallery />} />
-                    </>
+                                    navigate('/');
+                                }}
+                            >
+                                <img src={logoutIcon}></img>
+                                <span>Log out</span>
+                            </a>
+                        </nav>
+                    </header>
                 ) : ''}
-                <Route path="/login" element={
-                    <Login
-                        onAuthStateChange={(username, authState) => {
-                            setUsername(username);
-                            setAuthState(authState);
-                        }}
-                    />
-                } />
-                <Route
-                    path="*"
-                    element={
-                        authState === AuthState.Authenticated ? (
-                            <Navigate to="/gallery" replace />
-                        ) : (
-                            <Navigate to="/login" replace />
-                        )
-                    }
-                />
-            </Routes>
 
-            <footer>
-                William Roque | <a href="https://github.com/williamroque/startup/">GitHub</a>
-            </footer>
-        </div>
+                <Routes>
+                    {authState === AuthState.Authenticated ? (
+                        <>
+                            <Route path="/gallery" element={<Gallery username={username} />} />
+                            <Route path="/studio" element={<Studio />} />
+                            <Route path="/definition/:character" element={<Definition />} />
+                            <Route path="/discover" element={<Discover />} />
+                            <Route path="/visit" element={<Visit />} />
+                            <Route path="/visit-gallery" element={<VisitGallery />} />
+                        </>
+                    ) : ''}
+                    <Route path="/login" element={
+                        <Login
+                            onAuthStateChange={(username, authState) => {
+                                setUsername(username);
+                                setAuthState(authState);
+                            }}
+                        />
+                    } />
+                    <Route
+                        path="*"
+                        element={
+                            authState === AuthState.Authenticated ? (
+                                <Navigate to="/gallery" replace />
+                            ) : (
+                                <Navigate to="/login" replace />
+                            )
+                        }
+                    />
+                </Routes>
+
+                <footer>
+                    William Roque | <a href="https://github.com/williamroque/startup/">GitHub</a>
+                </footer>
+            </div>
+        </UserDictionaryContext.Provider>
     );
 };

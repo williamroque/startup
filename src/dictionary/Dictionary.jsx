@@ -17,7 +17,7 @@ function DictionaryList({ dictionary }) {
 
     return (
         <ul className="dictionary-list">
-            {characters.map((character, index) => {
+            {characters.reverse().map((character, index) => {
                 return <DictionaryEntry
                     key={index}
                     character={character}

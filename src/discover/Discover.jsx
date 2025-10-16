@@ -7,11 +7,16 @@ import KanjiCanvas from '../kanjicanvas/kanji-canvas';
 import './Discover.css';
 
 import Dictionary from '../dictionary/Dictionary';
-import { fullDictionary } from '../data/dictionaryData';
+import { Character } from '../data/dictionaryData';
+import { fullDictionary, UserDictionaryContext } from '../data/dictionaryData';
+
+import useImage from '../assets/useImage';
 
 const CanvasContext = createContext(null);
 
 function PredictiveCanvas({ handlePrediction }) {
+    const { userDictionary } = useContext(UserDictionaryContext);
+
     const canvasRef = useRef(null);
     const { canvasRef: forwardedRef } = useContext(CanvasContext);
     const [ strokes, setStrokes ] = useState([]);
@@ -71,7 +76,10 @@ function PredictiveCanvas({ handlePrediction }) {
     useEffect(() => {
         if (strokes.length > 0) {
             handlePrediction(
-                KanjiCanvas.recognizePattern(strokes).split(' ')[0]
+                KanjiCanvas.recognizePattern(
+                    strokes,
+                    userDictionary.getPlainCharacters()
+                ).split(' ')[0]
             );
         }
     }, [strokes, handlePrediction]);
@@ -82,6 +90,29 @@ function PredictiveCanvas({ handlePrediction }) {
             className="frame"
             id="discover-canvas"
         />
+    );
+}
+
+function NewCharacter({ character }) {
+    const { loading, image } = useImage(character.getID());
+
+    return (
+        <section>
+            <div className="new-character-container">
+                {loading ? '' : (
+                    <img
+                        className="new-character-image"
+                        src={image}
+                    />
+                )}
+                <span className="new-character-image-label">
+                    {character.getCharacter()}
+                </span>
+            </div>
+            <span className="new-character-translation-label">
+                {character.getName()}
+            </span>
+        </section>
     );
 }
 
@@ -121,7 +152,7 @@ function InsertPedestals({ pedestalValues }) {
     );
 }
 
-function ControlBox({ prediction }) {
+function ControlBox({ prediction, handleCombination }) {
     const [ pedestalValues, setPedestalValues ] = useState([]);
 
     const { clearCanvas } = useContext(CanvasContext);
@@ -136,8 +167,15 @@ function ControlBox({ prediction }) {
     }
 
     function handleInsert(prediction) {
-        setPedestalValues([...pedestalValues, prediction]);
+        const newPedestalValues = [...pedestalValues, prediction];
+
+        setPedestalValues(newPedestalValues);
         clearCanvas();
+
+        if (newPedestalValues.length > 1) {
+            handleCombination(...newPedestalValues);
+            setPedestalValues([]);
+        }
     }
 
     return (
@@ -158,6 +196,9 @@ function ControlBox({ prediction }) {
 function DiscoverSection() {
     const canvasRef = useRef(null);
     const [ prediction, setPrediction ] = useState(null);
+    const [ newCharacter, setNewCharacter ] = useState(null);
+
+    const { learnCharacter } = useContext(UserDictionaryContext);
 
     function clearCanvas() {
         if (canvasRef.current) {
@@ -170,6 +211,15 @@ function DiscoverSection() {
     function handlePrediction(prediction) {
         setPrediction(prediction);
     }
+
+    function handleCombination(a, b) {
+        const character = fullDictionary.findCombination(a, b);
+        
+        if (character) {
+            setNewCharacter(character);
+            learnCharacter(character);
+        }
+    }
     
     const contextValue = { canvasRef, clearCanvas }
 
@@ -179,9 +229,13 @@ function DiscoverSection() {
                 <div className="discover-canvas-container">
                     <PredictiveCanvas handlePrediction={handlePrediction} />
                     <div className="texture-overlay"></div>
+                    { newCharacter ? (
+                        <NewCharacter character={newCharacter} />
+                    ) : ''}
                 </div>
                 <ControlBox
                     prediction={prediction}
+                    handleCombination={handleCombination}
                     ref={canvasRef}
                 />
             </CanvasContext.Provider>
@@ -190,11 +244,13 @@ function DiscoverSection() {
 }
 
 export default function Discover() {
+    const { userDictionary  } = useContext(UserDictionaryContext);
+
     return (
         <main>
             <h1>Discover</h1>
             <DiscoverSection />
-            <Dictionary dictionary={fullDictionary} />
+            <Dictionary dictionary={userDictionary} />
         </main>
     );
 }
