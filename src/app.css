@@ -133,6 +133,8 @@ section {
     border: solid 4px #A89A82;
     box-sizing: border-box;
     position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 .frame-item {
@@ -162,6 +164,7 @@ section {
     opacity: 0.38;
     mix-blend-mode: multiply;
     filter: contrast(1.05) brightness(1.02);
+    margin: 0;
 }
 
 .return-button {

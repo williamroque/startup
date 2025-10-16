@@ -1,9 +1,15 @@
 .discover-box {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
     gap: 10px;
+}
+
+.discover-canvas-container {
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    font-size: 0;
 }
 
 .discover-button-span {
@@ -24,6 +30,13 @@
     cursor: pointer;
 }
 
+.discover-clear-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .discover-pedestals {
     width: 100%;
     display: flex;
@@ -37,11 +50,13 @@
     align-items: center;
     width: 100%;
     height: 50px;
-    background: black;
+    background: rgb(255, 255, 255);
     border: none;
+    box-shadow: 0 0 3px 1px rgb(187, 187, 187);
     text-transform: uppercase;
-    color: white;
+    color: black;
     font-family: 'Yuji Syuku';
     font-size: 120%;
     border-radius: 7px;
+    box-sizing: border-box;
 }
