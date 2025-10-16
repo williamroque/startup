@@ -130,18 +130,30 @@ const samples = [
     new Frame({
         'bottom-middle': sampleItem('滝'),
         'bottom-left': sampleItem('木'),
-        'top-right': sampleItem('水'),
+        'top-right': sampleItem('木'),
     })
 ];
 
 export default function Gallery({ username }) {
+    const frameData = JSON.parse(window.localStorage.getItem('gallery-frames')) || [];
+    const frames = frameData.map(frame => {
+        const items = Object.fromEntries(
+            Object.entries(frame).map(([position, character]) => {
+                const item = new Item(fullDictionary.getCharacter(character));
+                return [position, item];
+            })
+        );
+
+        return new Frame(items);
+    });
+    
     return (
         <main>
             <h1>Gallery</h1>
             <h2>Welcome back, <i>{ username}-san</i></h2>
             <div id="gallery-visit-indicator"><i>robbysmith</i> just visited your gallery.</div>
             <section>
-                {samples.map((frame, index) => {
+                {frames.reverse().map((frame, index) => {
                     return <GalleryRow frame={frame} key={index} />
                 })}
             </section>

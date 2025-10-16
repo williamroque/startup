@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './Studio.css';
 import Dictionary from '../dictionary/Dictionary';
@@ -39,6 +40,8 @@ function InputTable({ handleChange }) {
 export default function Studio() {
     const [ frame, setFrame ] = useState(new Frame());
 
+    const navigate = useNavigate();
+
     function handleChange(characterName, position) {
         const character = fullDictionary.getCharacter(characterName);
         setFrame(frame.swapCharacter(character, position));
@@ -50,6 +53,16 @@ export default function Studio() {
             <section>
                 <GalleryCanvas frame={frame} />
                 <InputTable rowCount={2} colCount={3} handleChange={handleChange} />
+                <button
+                    className="studio-save-button"
+                    onClick={() => {
+                        frame.save();
+                        navigate('/gallery');
+                        window.scrollTo(0, 0);
+                    }}
+                >
+                    Save to Gallery
+                </button>
             </section>
             <Dictionary />
         </main>

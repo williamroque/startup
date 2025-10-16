@@ -47,18 +47,18 @@ export class Frame {
             item => item.getLabel()
         ).join('');
     }
-}
 
-export class GalleryData {
-    constructor(frames) {
-        this._frames = frames;
+    save() {
+        let frames = JSON.parse(window.localStorage.getItem('gallery-frames')) || [];
+        
+        const data = Object.fromEntries(
+            Object.entries(this._items).map(([position, item]) => {
+                return [position, item.getLabel()];
+            })
+        );
 
-        if (!this._frames) {
-            this._frames = [];
-        }
-    }
+        frames.push(data);
 
-    addFrame(frame) {
-        this._frames.push(frame);
+        window.localStorage.setItem('gallery-frames', JSON.stringify(frames));
     }
 }

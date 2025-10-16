@@ -26,3 +26,16 @@
     -webkit-appearance: none;
     -moz-appearance: none;
 }
+
+.studio-save-button {
+    width: 100%;
+    height: 70px;
+    background: black;
+    border: none;
+    text-transform: uppercase;
+    color: white;
+    font-family: 'Roboto';
+    font-size: 90%;
+    border-radius: 7px;
+    cursor: pointer;
+}
