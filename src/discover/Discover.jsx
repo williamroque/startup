@@ -97,22 +97,17 @@ function NewCharacter({ character }) {
     const { loading, image } = useImage(character.getID());
 
     return (
-        <section>
-            <div className="new-character-container">
-                {loading ? '' : (
-                    <img
-                        className="new-character-image"
-                        src={image}
-                    />
-                )}
-                <span className="new-character-image-label">
-                    {character.getCharacter()}
-                </span>
-            </div>
-            <span className="new-character-translation-label">
-                {character.getName()}
+        <div className="new-character-container">
+            {loading ? '' : (
+                <img
+                    className="new-character-image"
+                    src={image}
+                />
+            )}
+            <span className="new-character-image-label">
+                {character.getCharacter()}
             </span>
-        </section>
+        </div>
     );
 }
 
@@ -196,9 +191,21 @@ function ControlBox({ prediction, handleCombination }) {
 function DiscoverSection() {
     const canvasRef = useRef(null);
     const [ prediction, setPrediction ] = useState(null);
-    const [ newCharacter, setNewCharacter ] = useState(null);
+    const [ newCharacter, setNewCharacter ] = useState();
 
     const { learnCharacter } = useContext(UserDictionaryContext);
+
+    useEffect(() => {
+        let timer;
+
+        if (newCharacter) {
+            timer = setTimeout(() => {
+                setNewCharacter(null);
+            }, 3000);
+        }
+
+        return () => clearTimeout(timer);
+    }, newCharacter);
 
     function clearCanvas() {
         if (canvasRef.current) {
