@@ -22,7 +22,7 @@ function GalleryItem({ position, item, frameSize }) {
     const [ width, height ] = frameSize;
 
     const foregroundFactor = 1.2;
-    let assetSize = 110 * item.getSizeFactor();
+    let assetSize = 0.225 * width * item.getSizeFactor();
 
     const positionNudge = positionNudges[position];
 
@@ -58,10 +58,10 @@ function GalleryItem({ position, item, frameSize }) {
         <div
             className="frame-item"
             style={{
-                left: x,
-                top: y,
-                height: assetSize,
-                width: assetSize,
+                left: x + 'px',
+                top: y + 'px',
+                height: assetSize + 'px',
+                width: assetSize + 'px',
             }}
         >
             <img
@@ -76,11 +76,19 @@ export function GalleryCanvas({ frame }) {
     const [frameSize, setFrameSize] = useState([0, 0]);
 
     useEffect(() => {
-        setFrameSize([
-            ref.current.offsetWidth,
-            ref.current.offsetHeight
-        ]);
-    }, [ref.current]);
+        function updateSize() {
+            if (ref.current) {
+                setFrameSize([
+                    ref.current.offsetWidth,
+                    ref.current.offsetHeight
+                ]);
+            }
+        }
+        updateSize();
+
+        window.addEventListener('resize', updateSize);
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
 
     return (
         <div className="frame" ref={ref}>

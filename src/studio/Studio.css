@@ -1,11 +1,11 @@
 .studio-input-table {
     margin-top: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 25vw;
     display: grid;
     width: 100%;
-    gap: 10vw 8vw;
+    gap: 26vw 2vw;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 100px 100px;
+    grid-template-rows: 2vw 2vw;
 }
 
 .studio-input-box {
