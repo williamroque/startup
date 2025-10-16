@@ -64,7 +64,7 @@ export default function Studio() {
                     Save to Gallery
                 </button>
             </section>
-            <Dictionary />
+            <Dictionary dictionary={fullDictionary} />
         </main>
     );
 }

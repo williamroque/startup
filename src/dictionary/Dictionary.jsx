@@ -1,36 +1,37 @@
 import React from 'react';
 import './Dictionary.css';
 
-export default function Dictionary() {
+function DictionaryEntry({ character }) {
+    return (
+        <li>
+            <a href={`definition/${character.getCharacter()}`}>
+                <span className="definition-character">{character.getCharacter()}</span>
+                <span className="definition-label">{character.getName()}</span>
+            </a>
+        </li>
+    );
+}
+
+function DictionaryList({ dictionary }) {
+    const characters = dictionary.getCharacters();
+
+    return (
+        <ul className="dictionary-list">
+            {characters.map((character, index) => {
+                return <DictionaryEntry
+                    key={index}
+                    character={character}
+                />;
+            })}
+        </ul>
+    );
+}
+
+export default function Dictionary({ dictionary }) {
     return (
         <section>
             <h2>Dictionary</h2>
-            <ul className="dictionary-list">
-                <li>
-                    <a href="definition">
-                        <span className="definition-character">石</span>
-                        <span className="definition-label">Stone</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="definition">
-                        <span className="definition-character">家</span>
-                        <span className="definition-label">House</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="definition">
-                        <span className="definition-character">水</span>
-                        <span className="definition-label">Water</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="definition">
-                        <span className="definition-character">川</span>
-                        <span className="definition-label">River</span>
-                    </a>
-                </li>
-            </ul>
+            <DictionaryList dictionary={dictionary} />
         </section>
     );
 }

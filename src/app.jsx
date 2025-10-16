@@ -32,7 +32,7 @@ export default function App() {
 
     return (
         <div id="app">
-            { authState === AuthState.Authenticated && pathname !== '/definition' && pathname !== '/visit-gallery' ? (
+            { authState === AuthState.Authenticated && !pathname.startsWith('/definition') && pathname !== '/visit-gallery' ? (
                 <header>
                     <nav>
                         <NavLink to="gallery" className="nav-link">
@@ -73,7 +73,7 @@ export default function App() {
                     <>
                         <Route path="/gallery" element={<Gallery username={ username } />} />
                         <Route path="/studio" element={<Studio />} />
-                        <Route path="/definition" element={<Definition />} />
+                        <Route path="/definition/:character" element={<Definition />} />
                         <Route path="/discover" element={<Discover />} />
                         <Route path="/visit" element={<Visit />} />
                         <Route path="/visit-gallery" element={<VisitGallery />} />

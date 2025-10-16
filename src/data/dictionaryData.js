@@ -15,6 +15,10 @@ export class Character {
         return this._character;
     }
 
+    getName() {
+        return this._name;
+    }
+
     getSizeFactor() {
         return this._sizeFactor;
     }

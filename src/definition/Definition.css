@@ -18,7 +18,7 @@
 .definition-image-label {
     position: absolute;
     font-family: 'Yuji Syuku';
-    font-size: 48pt;
+    font-size: 10vh;
     color: #333;
 }
 
@@ -26,4 +26,12 @@
     font-family: 'Roboto';
     text-transform: uppercase;
     color: #212121;
+}
+
+.stroke-order-section {
+    margin-top: 50px;
+}
+
+.stroke-order-section video {
+    height: 30vh;
 }
