@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect, createContext, useContext, useImperativeHandle } from 'react';
 import { useWindowSize } from 'react-use';
+
 import Atrament from 'atrament';
+import KanjiCanvas from '../kanjicanvas/kanji-canvas';
 
 import './Discover.css';
 
@@ -9,15 +11,17 @@ import { fullDictionary } from '../data/dictionaryData';
 
 const CanvasContext = createContext(null);
 
-function PredictiveCanvas() {
+function PredictiveCanvas({ handlePrediction }) {
     const canvasRef = useRef(null);
     const { canvasRef: forwardedRef } = useContext(CanvasContext);
+    const [ strokes, setStrokes ] = useState([]);
 
     useImperativeHandle(forwardedRef, () => ({
         clearCanvas() {
             const canvas = canvasRef.current;
             const context = canvas.getContext('2d');
             context.clearRect(0, 0, canvas.width, canvas.height);
+            setStrokes([]);
         }
     }))
 
@@ -41,24 +45,50 @@ function PredictiveCanvas() {
 
             const atrament = new Atrament(canvas);
 
+            atrament.recordStrokes = true;
+
             atrament.mode = 'draw';
             atrament.color = '#212121';
             atrament.weight = 5;
+
+            KanjiCanvas.init('discover-canvas');
+
+            function handleStrokeRecorded({ stroke }) {
+                setStrokes(prevStrokes => [
+                    ...prevStrokes,
+                    stroke.segments.map(segment => [segment.point.x, segment.point.y])
+                ]);
+            }
+
+            atrament.addEventListener('strokerecorded', handleStrokeRecorded);
+
+            return () => {
+                atrament.removeEventListener('strokerecorded', handleStrokeRecorded);
+            };
         }
     }, [windowWidth, windowHeight]);
+
+    useEffect(() => {
+        if (strokes.length > 0) {
+            handlePrediction(
+                KanjiCanvas.recognizePattern(strokes).split(' ')[0]
+            );
+        }
+    }, [strokes, handlePrediction]);
 
     return (
         <canvas
             ref={canvasRef}
             className="frame"
+            id="discover-canvas"
         />
     );
 }
 
-function InsertButton() {
+function InsertButton({ prediction }) {
     return (
-        <button className="discover-button">
-            Insert <span className="discover-button-span">水</span>
+        <button className={prediction ? 'discover-button' : 'discover-button disabled'}>
+            Insert <span className="discover-button-span">{prediction}</span>
         </button>
     );
 }
@@ -88,7 +118,7 @@ function InsertPedestals({ pedestalValues }) {
     );
 }
 
-function ControlBox() {
+function ControlBox({ prediction }) {
     const [ pedestalValues, setPedestalValues ] = useState([]);
 
     const { clearCanvas } = useContext(CanvasContext);
@@ -108,7 +138,7 @@ function ControlBox() {
                 <ClearCanvasButton handleClearCanvas={handleClearCanvas} />
                 <ClearAllButton handleClearAll={handleClearAll} />
             </div>
-            <InsertButton />
+            <InsertButton prediction={prediction} />
             <InsertPedestals pedestalValues={pedestalValues} />
         </div>
     );
@@ -116,11 +146,18 @@ function ControlBox() {
 
 function DiscoverSection() {
     const canvasRef = useRef(null);
+    const [ prediction, setPrediction ] = useState(null);
 
     function clearCanvas() {
         if (canvasRef.current) {
             canvasRef.current.clearCanvas();
         }
+
+        setPrediction(null);
+    }
+
+    function handlePrediction(prediction) {
+        setPrediction(prediction);
     }
     
     const contextValue = { canvasRef, clearCanvas }
@@ -129,10 +166,13 @@ function DiscoverSection() {
         <section>
             <CanvasContext.Provider value={contextValue}>
                 <div className="discover-canvas-container">
-                    <PredictiveCanvas />
+                    <PredictiveCanvas handlePrediction={handlePrediction} />
                     <div className="texture-overlay"></div>
                 </div>
-                <ControlBox clearCanvas={clearCanvas} ref={canvasRef} />
+                <ControlBox
+                    prediction={prediction}
+                    ref={canvasRef}
+                />
             </CanvasContext.Provider>
         </section>
     );

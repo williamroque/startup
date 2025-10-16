@@ -30,6 +30,12 @@
     cursor: pointer;
 }
 
+.discover-button.disabled {
+    opacity: 0.4;
+    color: rgb(137, 134, 134);
+    pointer-events: none;
+}
+
 .discover-clear-buttons {
     width: 100%;
     display: flex;
