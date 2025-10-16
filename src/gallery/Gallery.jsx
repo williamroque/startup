@@ -93,59 +93,52 @@ export function GalleryCanvas({ frame }) {
     );
 }
 
-function GalleryControls({ label }) {
+function GalleryControls({ label, handleDelete }) {
     return (
         <div className="gallery-controls">
             <div className="gallery-label">{label}</div>
-            <button className="gallery-delete">
+            <button className="gallery-delete" onClick={handleDelete}>
                 <img src={closeIcon}></img>
             </button>
         </div>
     );
 }
 
-function GalleryRow({ frame }) {
+function GalleryRow({ frame, handleDeleteFrame }) {
     const label = frame.getLabel();
 
     return (
         <div className="gallery-row">
             <GalleryCanvas frame={frame} />
-            <GalleryControls label={label} />
+            <GalleryControls label={label} handleDelete={() => handleDeleteFrame(frame)} />
         </div>
     );
 }
 
-function sampleItem(character) {
-    return new Item(fullDictionary.getCharacter(character));
-}
-
-const samples = [
-    new Frame({
-        'bottom-middle': sampleItem('川'),
-        'top-middle': sampleItem('家'),
-        'bottom-left': sampleItem('石'),
-        'top-right': sampleItem('空'),
-        'bottom-right': sampleItem('人'),
-    }),
-    new Frame({
-        'bottom-middle': sampleItem('滝'),
-        'bottom-left': sampleItem('木'),
-        'top-right': sampleItem('木'),
-    })
-];
-
 export default function Gallery({ username }) {
-    const frameData = JSON.parse(window.localStorage.getItem('gallery-frames')) || [];
-    const frames = frameData.map(frame => {
-        const items = Object.fromEntries(
-            Object.entries(frame).map(([position, character]) => {
-                const item = new Item(fullDictionary.getCharacter(character));
-                return [position, item];
-            })
-        );
+    const [frames, setFrames] = useState(() => {
+        let frameData = JSON.parse(window.localStorage.getItem('gallery-frames')) || [];
+        frameData = frameData.map(frame => {
+            let items = {};
 
-        return new Frame(items);
+            for (const position in frame) {
+                if (position !== 'id') {
+                    const character = frame[position];
+                    items[position] = new Item(fullDictionary.getCharacter(character));
+                }
+            }
+
+            return new Frame(items, frame.id);
+        });
+
+        return frameData;
     });
+
+    function handleDeleteFrame(frame) {
+        console.log(frames)
+        setFrames(frames.filter(f => f._id !== frame._id));
+        frame.delete();
+    }
     
     return (
         <main>
@@ -153,8 +146,12 @@ export default function Gallery({ username }) {
             <h2>Welcome back, <i>{ username}-san</i></h2>
             <div id="gallery-visit-indicator"><i>robbysmith</i> just visited your gallery.</div>
             <section>
-                {frames.reverse().map((frame, index) => {
-                    return <GalleryRow frame={frame} key={index} />
+                {[...frames].reverse().map((frame, index) => {
+                    return <GalleryRow
+                        frame={frame}
+                        key={index}
+                        handleDeleteFrame={handleDeleteFrame}
+                    />
                 })}
             </section>
         </main>

@@ -19,11 +19,16 @@ export class Item {
 }
 
 export class Frame {
-    constructor(items) {
+    constructor(items, id) {
         this._items = items;
+        this._id = id;
 
         if (!this._items) {
             this._items = {};
+        }
+
+        if (!this._id) {
+            this._id = Date.now();
         }
     }
 
@@ -56,8 +61,16 @@ export class Frame {
                 return [position, item.getLabel()];
             })
         );
+        data['id'] = this._id;
 
         frames.push(data);
+
+        window.localStorage.setItem('gallery-frames', JSON.stringify(frames));
+    }
+
+    delete() {
+        let frames = JSON.parse(window.localStorage.getItem('gallery-frames')) || [];
+        frames = frames.filter(frame => frame.id !== this._id);
 
         window.localStorage.setItem('gallery-frames', JSON.stringify(frames));
     }
