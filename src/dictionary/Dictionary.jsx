@@ -5,29 +5,29 @@ export default function Dictionary() {
     return (
         <section>
             <h2>Dictionary</h2>
-            <ul class="dictionary-list">
+            <ul className="dictionary-list">
                 <li>
                     <a href="definition">
-                        <span class="definition-character">石</span>
-                        <span class="definition-label">Stone</span>
+                        <span className="definition-character">石</span>
+                        <span className="definition-label">Stone</span>
                     </a>
                 </li>
                 <li>
                     <a href="definition">
-                        <span class="definition-character">家</span>
-                        <span class="definition-label">House</span>
+                        <span className="definition-character">家</span>
+                        <span className="definition-label">House</span>
                     </a>
                 </li>
                 <li>
                     <a href="definition">
-                        <span class="definition-character">水</span>
-                        <span class="definition-label">Water</span>
+                        <span className="definition-character">水</span>
+                        <span className="definition-label">Water</span>
                     </a>
                 </li>
                 <li>
                     <a href="definition">
-                        <span class="definition-character">川</span>
-                        <span class="definition-label">River</span>
+                        <span className="definition-character">川</span>
+                        <span className="definition-label">River</span>
                     </a>
                 </li>
             </ul>

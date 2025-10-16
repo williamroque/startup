@@ -201,17 +201,4 @@ section {
     #form div.form-buttons {
         flex-direction: row;
     }
-
-    .studio-input-table {
-        gap: 3vw;
-    }
-
-    .studio-input-row {
-        justify-content: center;
-        gap: 3vw;
-    }
-
-    .studio-input-box {
-        width: 90px;
-    }
 }

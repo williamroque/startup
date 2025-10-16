@@ -1,25 +1,28 @@
 .studio-input-table {
     margin-top: 10px;
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 50px;
+    display: grid;
     width: 100%;
-    gap: 7vw;
-}
-
-.studio-input-row {
-    display: flex;
-    justify-content: space-between;
+    gap: 10vw 8vw;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100px 100px;
 }
 
 .studio-input-box {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     background: #ccc;
     border-radius: 10px;
-    width: 30%;
+    width: 100%;
     aspect-ratio: 1;
     color: white;
     font-family: 'Noto Sans JP';
     font-size: 18pt;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }

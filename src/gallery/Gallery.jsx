@@ -67,7 +67,7 @@ function GalleryItem({ position, item, frameSize }) {
     );
 }
 
-function GalleryCanvas({ frame }) {
+export function GalleryCanvas({ frame }) {
     const ref = useRef(null);
     const [frameSize, setFrameSize] = useState([0, 0]);
 

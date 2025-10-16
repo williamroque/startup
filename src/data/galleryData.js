@@ -5,6 +5,10 @@ export class Item {
         this._character = character;
     }
 
+    isEmpty() {
+        return !this._character;
+    }
+
     getLabel() {
         return this._character.getCharacter();
     }
@@ -27,8 +31,15 @@ export class Frame {
         this._items[position] = item;
     }
 
+    swapCharacter(character, position) {
+        let items = {...this._items};
+        items[position] = new Item(character);
+
+        return new Frame(items);
+    }
+
     getItems() {
-        return Object.entries(this._items);
+        return Object.entries(this._items).filter(([_, item]) => !item.isEmpty());
     }
 
     getLabel() {

@@ -34,7 +34,11 @@ export class DictionaryData {
     }
 
     getCharacter(character) {
-        return this._characters[character];
+        return this._characters[character] || null;
+    }
+
+    getCharacters() {
+        return Object.values(this._characters);
     }
 }
 
