@@ -141,8 +141,8 @@ export default function Gallery({ username }) {
             <h2>Welcome back, <i>{ username}-san</i></h2>
             <div id="gallery-visit-indicator"><i>robbysmith</i> just visited your gallery.</div>
             <section>
-                {samples.map(frame => {
-                    return <GalleryRow frame={frame} />
+                {samples.map((frame, index) => {
+                    return <GalleryRow frame={frame} key={index} />
                 })}
             </section>
         </main>

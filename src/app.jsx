@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { NavLink, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 
 import AuthState from './login/authState';
 
@@ -79,18 +79,21 @@ export default function App() {
                         <Route path="/visit-gallery" element={<VisitGallery />} />
                     </>
                 ) : ''}
+                <Route path="/login" element={
+                    <Login
+                        onAuthStateChange={(username, authState) => {
+                            setUsername(username);
+                            setAuthState(authState);
+                        }}
+                    />
+                } />
                 <Route
                     path="*"
                     element={
                         authState === AuthState.Authenticated ? (
-                            <Gallery username={ username } />
+                            <Navigate to="/gallery" replace />
                         ) : (
-                            <Login
-                                onAuthStateChange={(username, authState) => {
-                                    setUsername(username);
-                                    setAuthState(authState);
-                                }}
-                            />
+                            <Navigate to="/login" replace />
                         )
                     }
                 />
