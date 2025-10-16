@@ -27,7 +27,11 @@ export class Character {
 
     testCombination(a, b) {
         if (!this._combination) return false;
-        return this._combination.indexOf(a) > -1 && this._combination.indexOf(b) > -1;
+
+        return (
+            (this._combination[0] === a && this._combination[1] === b) ||
+            (this._combination[1] === a && this._combination[0] === b)
+        );
     }
 }
 
