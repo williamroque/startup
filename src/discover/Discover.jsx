@@ -216,7 +216,7 @@ function DiscoverSection() {
         if (newCharacter) {
             timer = setTimeout(() => {
                 setNewCharacter(null);
-            }, 3000);
+            }, 5000);
         }
 
         return () => clearTimeout(timer);
