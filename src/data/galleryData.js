@@ -10,7 +10,14 @@ export class Item {
     }
 
     getLabel() {
+        if (this.isEmpty()) {
+            return '';
+        }
         return this._character.getCharacter();
+    }
+
+    getSizeFactor() {
+        return this._character.getSizeFactor();
     }
 
     getImage() {
@@ -56,11 +63,15 @@ export class Frame {
     save() {
         let frames = JSON.parse(window.localStorage.getItem('gallery-frames')) || [];
         
-        const data = Object.fromEntries(
-            Object.entries(this._items).map(([position, item]) => {
-                return [position, item.getLabel()];
-            })
-        );
+        let data = {};
+        for (const position in this._items) {
+            const item = this._items[position];
+
+            if (!item.isEmpty()) {
+                data[position] = item.getLabel();
+            }
+        }
+
         data['id'] = this._id;
 
         frames.push(data);

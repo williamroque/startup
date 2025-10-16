@@ -21,7 +21,8 @@ function GalleryItem({ position, item, frameSize }) {
 
     const [ width, height ] = frameSize;
 
-    const assetSize = 110;
+    const foregroundFactor = 1.2;
+    let assetSize = 110 * item.getSizeFactor();
 
     const positionNudge = positionNudges[position];
 
@@ -39,14 +40,17 @@ function GalleryItem({ position, item, frameSize }) {
             break;
         case 'bottom-left':
             y += height - assetSize;
+            assetSize *= foregroundFactor;
             break;
         case 'bottom-middle':
             x += width / 2 - assetSize / 2;
             y += height - assetSize;
+            assetSize *= foregroundFactor;
             break;
         case 'bottom-right':
             x += width - assetSize;
             y += height - assetSize;
+            assetSize *= foregroundFactor;
             break;
     }
 
@@ -135,7 +139,6 @@ export default function Gallery({ username }) {
     });
 
     function handleDeleteFrame(frame) {
-        console.log(frames)
         setFrames(frames.filter(f => f._id !== frame._id));
         frame.delete();
     }
