@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState, useEffect, createContext, useContext, useImperativeHandle } from 'react';
 import { useWindowSize } from 'react-use';
 import Atrament from 'atrament';
 
@@ -7,8 +7,20 @@ import './Discover.css';
 import Dictionary from '../dictionary/Dictionary';
 import { fullDictionary } from '../data/dictionaryData';
 
+const CanvasContext = createContext(null);
+
 function PredictiveCanvas() {
     const canvasRef = useRef(null);
+    const { canvasRef: forwardedRef } = useContext(CanvasContext);
+
+    useImperativeHandle(forwardedRef, () => ({
+        clearCanvas() {
+            const canvas = canvasRef.current;
+            const context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    }))
+
     const { width: windowWidth, height: windowHeight } = useWindowSize();
 
     useEffect(() => {
@@ -51,52 +63,77 @@ function InsertButton() {
     );
 }
 
-function ClearCanvasButton() {
+function ClearCanvasButton({ handleClearCanvas }) {
     return (
-        <button className="discover-button">
+        <button className="discover-button" onClick={handleClearCanvas}>
             Clear Canvas
         </button>
     );
 }
 
-function ClearAllButton() {
+function ClearAllButton({ handleClearAll }) {
     return (
-        <button className="discover-button">
+        <button className="discover-button" onClick={handleClearAll}>
             Clear All
         </button>
     );
 }
 
-function InsertPedestals() {
+function InsertPedestals({ pedestalValues }) {
     return (
         <div className="discover-pedestals">
-            <div className="discover-pedestal">水</div>
-            <div className="discover-pedestal"></div>
+            <div className="discover-pedestal">{pedestalValues[0] || ''}</div>
+            <div className="discover-pedestal">{pedestalValues[1] || ''}</div>
         </div>
     );
 }
 
 function ControlBox() {
+    const [ pedestalValues, setPedestalValues ] = useState([]);
+
+    const { clearCanvas } = useContext(CanvasContext);
+
+    function handleClearCanvas() {
+        clearCanvas();
+    }
+
+    function handleClearAll() {
+        clearCanvas();
+        setPedestalValues([]);
+    }
+
     return (
         <div className="discover-box">
             <div className="discover-clear-buttons">
-                <ClearCanvasButton />
-                <ClearAllButton />
+                <ClearCanvasButton handleClearCanvas={handleClearCanvas} />
+                <ClearAllButton handleClearAll={handleClearAll} />
             </div>
             <InsertButton />
-            <InsertPedestals />
+            <InsertPedestals pedestalValues={pedestalValues} />
         </div>
     );
 }
 
 function DiscoverSection() {
+    const canvasRef = useRef(null);
+
+    function clearCanvas() {
+        if (canvasRef.current) {
+            canvasRef.current.clearCanvas();
+        }
+    }
+    
+    const contextValue = { canvasRef, clearCanvas }
+
     return (
         <section>
-            <div className="discover-canvas-container">
-                <PredictiveCanvas />
-                <div className="texture-overlay"></div>
-            </div>
-            <ControlBox />
+            <CanvasContext.Provider value={contextValue}>
+                <div className="discover-canvas-container">
+                    <PredictiveCanvas />
+                    <div className="texture-overlay"></div>
+                </div>
+                <ControlBox clearCanvas={clearCanvas} ref={canvasRef} />
+            </CanvasContext.Provider>
         </section>
     );
 }
