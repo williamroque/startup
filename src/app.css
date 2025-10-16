@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Yuji+Syuku&family=Zen+Old+Mincho&display=swap');
 
 * {
-    user-select: none;
+    -webkit-user-select: none !important;
+    user-select: none !important;
 }
 
 a {
@@ -13,6 +14,7 @@ html, body, #root, #app {
     margin: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
     font-family: Roboto, Helvetica, sans-serif;
 }
 
@@ -74,11 +76,13 @@ nav a span:last-child {
 
 main {
     display: flex;
-    flex: 1;
     flex-direction: column;
     align-items: center;
-    width: 80%;
-    padding: 90px 0;
+    width: 100%;
+    height: 100%;
+    padding: 90px 10vw;
+    overflow-y: scroll;
+    box-sizing: border-box;
 }
 
 footer {
@@ -135,6 +139,7 @@ section {
     position: relative;
     margin: 0;
     padding: 0;
+    touch-action: none;
 }
 
 .frame-item {
@@ -192,7 +197,7 @@ section {
     }
 
     main {
-        width: 500px;
+        padding: 90px calc(50% - 250px);
     }
 
     nav a span:last-child {

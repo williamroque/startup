@@ -11,6 +11,7 @@
     box-sizing: border-box;
     font-size: 0;
     cursor: crosshair;
+    touch-action: none !important;
 }
 
 .discover-button-span {
@@ -91,10 +92,12 @@
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     animation: fadeIn 0.5s ease-in-out forwards;
+    opacity: 0;
+    animation-delay: .3s;
 }
 
 .new-character-image {
-    height: 100%    ;
+    height: 100%;
     opacity: 0.5;
 }
 

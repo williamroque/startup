@@ -63,7 +63,7 @@ export default function Definition() {
     const characterObject = fullDictionary.getCharacter(character);
 
     return (
-        <main className="definition-main">
+        <main>
             <ReturnButton />
             <CharacterDefinition character={characterObject} />
             <StrokeOrder character={characterObject} />

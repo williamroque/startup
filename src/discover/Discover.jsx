@@ -18,59 +18,74 @@ function PredictiveCanvas({ handlePrediction }) {
     const { userDictionary } = useContext(UserDictionaryContext);
 
     const canvasRef = useRef(null);
+    const atramentRef = useRef(null);
+
     const { canvasRef: forwardedRef } = useContext(CanvasContext);
     const [ strokes, setStrokes ] = useState([]);
 
     useImperativeHandle(forwardedRef, () => ({
         clearCanvas() {
-            const canvas = canvasRef.current;
-            const context = canvas.getContext('2d');
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            setStrokes([]);
+            if (atramentRef.current) {
+                atramentRef.current.clear();
+                setStrokes([]);
+            }
         }
     }))
 
     const { width: windowWidth, height: windowHeight } = useWindowSize();
 
     useEffect(() => {
-        if (canvasRef.current) {
-            const canvas = canvasRef.current;
-            const ctx = canvas.getContext('2d');
+        if (!canvasRef.current) return;
 
-            const dpr = window.devicePixelRatio || 1;
+        const canvas = canvasRef.current;
 
-            const parent = canvas.parentElement;
-            const canvasWidth = parent.clientWidth;
-            const canvasHeight = 4/5 * canvasWidth;
+        const dpr = window.devicePixelRatio || 1;
 
-            canvas.width = canvasWidth;
-            canvas.height = canvasHeight;
+        const parent = canvas.parentElement;
+        const canvasWidth = parent.clientWidth;
+        const canvasHeight = 4/5 * canvasWidth;
 
-            ctx.scale(dpr, dpr);
+        canvas.width = canvasWidth * dpr;
+        canvas.height = canvasHeight * dpr;
 
-            const atrament = new Atrament(canvas);
+        canvas.style.width = `${canvasWidth}px`;
+        canvas.style.height = `${canvasHeight}px`;
 
-            atrament.recordStrokes = true;
+        const atrament = new Atrament(canvas);
 
-            atrament.mode = 'draw';
-            atrament.color = '#212121';
-            atrament.weight = 5;
+        atrament.recordStrokes = true;
 
-            KanjiCanvas.init('discover-canvas');
+        atrament.mode = 'draw';
+        atrament.color = '#212121';
+        atrament.weight = 5 * dpr;
+        atrament.smoothing = 1;
+        atramentRef.current = atrament;
+        atrament.pressureLow = 1;
+        atrament.pressureHigh = 1;
+        atrament.pressureSmoothing = 0;
+        atrament.adaptiveStroke = true;
 
-            function handleStrokeRecorded({ stroke }) {
-                setStrokes(prevStrokes => [
-                    ...prevStrokes,
-                    stroke.segments.map(segment => [segment.point.x, segment.point.y])
-                ]);
-            }
-
-            atrament.addEventListener('strokerecorded', handleStrokeRecorded);
-
-            return () => {
-                atrament.removeEventListener('strokerecorded', handleStrokeRecorded);
-            };
+        if (window.matchMedia('(max-width: 600px)').matches) {
+            atrament.weight *= .7;
         }
+
+        function handleStrokeRecorded({ stroke }) {
+            setStrokes(prevStrokes => [
+                ...prevStrokes,
+                stroke.segments.map(segment => [segment.point.x, segment.point.y])
+            ]);
+        }
+
+        atrament.addEventListener('strokerecorded', handleStrokeRecorded);
+
+        return () => {
+            atrament.removeEventListener('strokerecorded', handleStrokeRecorded);
+
+            if (atramentRef.current) {
+                atramentRef.current.destroy();
+                atramentRef.current = null;
+            }
+        };
     }, [windowWidth, windowHeight]);
 
     useEffect(() => {
@@ -96,14 +111,14 @@ function PredictiveCanvas({ handlePrediction }) {
 function NewCharacter({ character }) {
     const { loading, image } = useImage(character.getID());
 
+    if (loading || !image) return null;
+
     return (
         <div className="new-character-container">
-            {loading ? '' : (
-                <img
-                    className="new-character-image"
-                    src={image}
-                />
-            )}
+            <img
+                className="new-character-image"
+                src={image}
+            />
             <span className="new-character-image-label">
                 {character.getCharacter()}
             </span>
