@@ -5,6 +5,15 @@
     user-select: none !important;
 }
 
+a:active,
+button:active,
+input:active,
+textarea:active,
+select:active {
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent !important;
+}
+
 a {
     outline: none;
 }
