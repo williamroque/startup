@@ -10,19 +10,26 @@ import { UserDictionaryContext } from '../data/dictionaryData';
 
 function InputBox({ handleChange, position }) {
     const { userDictionary } = useContext(UserDictionaryContext);
+    const [ inputValue, setInputValue ] = useState(null);
 
     return (
-        <select
-            className="studio-input-box"
-            onChange={e => {
-                handleChange(e.target.value, position);
-            }}
-        >
-            <option></option>
-            {userDictionary.getCharacters().map((character, index) => {
-                return <option key={index}>{character.getCharacter()}</option>;
-            })}
-        </select>
+        <div className="studio-input-box">
+            <div className="studio-input-select-text">
+                {inputValue}
+            </div>
+            <select
+                className="studio-input-select"
+                onChange={e => {
+                    setInputValue(e.target.value);
+                    handleChange(e.target.value, position);
+                }}
+            >
+                <option></option>
+                {userDictionary.getCharacters().map((character, index) => {
+                    return <option key={index}>{character.getCharacter()}</option>;
+                })}
+            </select>
+        </div>
     );
 }
 
