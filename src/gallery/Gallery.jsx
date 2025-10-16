@@ -152,6 +152,20 @@ export default function Gallery({ username }) {
         return frameData;
     });
 
+    const [userVisit, setUserVisit] = useState(null);
+
+    useEffect(() => {
+        function mockUserVisit() {
+            const fakeNames = ['robbysmith', 'jenniferjohnson', 'sammywilson', 'jonathanrhodes'];
+            const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
+
+            setUserVisit(name);
+
+            setTimeout(mockUserVisit, 5000 * Math.random());
+        }
+        setTimeout(mockUserVisit, 3000);
+    }, []);
+
     function handleDeleteFrame(frame) {
         setFrames(frames.filter(f => f._id !== frame._id));
         frame.delete();
@@ -161,7 +175,9 @@ export default function Gallery({ username }) {
         <main>
             <h1>Gallery</h1>
             <h2>Welcome back, <i>{ username}-san</i></h2>
-            <div id="gallery-visit-indicator"><i>robbysmith</i> just visited your gallery.</div>
+            { userVisit ? (
+                <div id="gallery-visit-indicator"><i>{userVisit}</i> just visited your gallery.</div>
+            ) : ''}
             <section>
                 {[...frames].reverse().map((frame, index) => {
                     return <GalleryRow
