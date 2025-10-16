@@ -105,24 +105,30 @@ export function GalleryCanvas({ frame }) {
     );
 }
 
-function GalleryControls({ label, handleDelete }) {
+function GalleryControls({ label, handleDelete, hideDelete }) {
     return (
         <div className="gallery-controls">
             <div className="gallery-label">{label}</div>
-            <button className="gallery-delete" onClick={handleDelete}>
-                <img src={closeIcon}></img>
-            </button>
+            {hideDelete ? '' : (
+                <button className="gallery-delete" onClick={handleDelete}>
+                    <img src={closeIcon}></img>
+                </button>
+            )}
         </div>
     );
 }
 
-function GalleryRow({ frame, handleDeleteFrame }) {
+export function GalleryRow({ frame, handleDeleteFrame, hideDelete }) {
     const label = frame.getLabel();
 
     return (
         <div className="gallery-row">
             <GalleryCanvas frame={frame} />
-            <GalleryControls label={label} handleDelete={() => handleDeleteFrame(frame)} />
+            <GalleryControls
+                label={label}
+                handleDelete={() => handleDeleteFrame(frame)}
+                hideDelete={hideDelete}
+            />
         </div>
     );
 }

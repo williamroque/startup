@@ -7,10 +7,10 @@ export default function Visit() {
             <h1>Visit</h1>
             <section>
                 <ul className="visit-users-list">
-                    <li><a href="/visit-gallery">robbysmith</a></li>
-                    <li><a href="/visit-gallery">jenniferjohnson</a></li>
-                    <li><a href="/visit-gallery">sammywilson</a></li>
-                    <li><a href="/visit-gallery">jonathanrhodes</a></li>
+                    <li><a href="/visit-gallery/robbysmith">robbysmith</a></li>
+                    <li><a href="/visit-gallery/jenniferjohnson">jenniferjohnson</a></li>
+                    <li><a href="/visit-gallery/sammywilson">sammywilson</a></li>
+                    <li><a href="/visit-gallery/jonathanrhodes">jonathanrhodes</a></li>
                 </ul>
             </section>
         </main>

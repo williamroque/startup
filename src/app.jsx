@@ -50,11 +50,17 @@ export default function App() {
     }
 
     const contextValue = { userDictionary, learnCharacter };
+    const showHeader = (
+        authState === AuthState.Authenticated
+        && !pathname.startsWith('/definition')
+        && !pathname.startsWith('/visit-gallery')
+        && pathname !== '/visit-gallery'
+    );
 
     return (
         <UserDictionaryContext.Provider value={contextValue}>
             <div id="app">
-                {authState === AuthState.Authenticated && !pathname.startsWith('/definition') && pathname !== '/visit-gallery' ? (
+                {showHeader ? (
                     <header>
                         <nav>
                             <NavLink to="gallery" className="nav-link">
@@ -98,7 +104,7 @@ export default function App() {
                             <Route path="/definition/:character" element={<Definition />} />
                             <Route path="/discover" element={<Discover />} />
                             <Route path="/visit" element={<Visit />} />
-                            <Route path="/visit-gallery" element={<VisitGallery />} />
+                            <Route path="/visit-gallery/:user" element={<VisitGallery />} />
                         </>
                     ) : ''}
                     <Route path="/login" element={
