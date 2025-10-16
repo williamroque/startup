@@ -2,6 +2,7 @@ import './Gallery.css';
 import React, { useRef, useState, useEffect } from 'react';
 
 import { Frame, Item } from '../data/galleryData';
+import { Character, fullDictionary } from '../data/dictionaryData';
 
 import closeIcon from '../assets/icons/close.svg';
 
@@ -114,18 +115,22 @@ function GalleryRow({ frame }) {
     );
 }
 
+function sampleItem(character) {
+    return new Item(fullDictionary.getCharacter(character));
+}
+
 const samples = [
     new Frame({
-        'bottom-middle': new Item('river', '川'),
-        'top-middle': new Item('house', '家'),
-        'bottom-left': new Item('stone', '石'),
-        'top-right': new Item('sky', '空'),
-        'bottom-right': new Item('person', '人'),
+        'bottom-middle': sampleItem('川'),
+        'top-middle': sampleItem('家'),
+        'bottom-left': sampleItem('石'),
+        'top-right': sampleItem('空'),
+        'bottom-right': sampleItem('人'),
     }),
     new Frame({
-        'bottom-middle': new Item('waterfall', '滝'),
-        'bottom-left': new Item('wood', '木'),
-        'top-right': new Item('water', '木'),
+        'bottom-middle': sampleItem('滝'),
+        'bottom-left': sampleItem('木'),
+        'top-right': sampleItem('水'),
     })
 ];
 

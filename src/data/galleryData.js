@@ -1,13 +1,16 @@
 import useImage from '../assets/useImage';
 
 export class Item {
-    constructor(itemType, itemCharacter) {
-        this._itemType = itemType;
-        this._itemCharacter = itemCharacter;
+    constructor(character) {
+        this._character = character;
+    }
+
+    getLabel() {
+        return this._character.getCharacter();
     }
 
     getImage() {
-        return useImage(this._itemType);
+        return useImage(this._character.getID());
     }
 }
 
@@ -30,7 +33,7 @@ export class Frame {
 
     getLabel() {
         return Object.values(this._items).map(
-            item => item._itemCharacter
+            item => item.getLabel()
         ).join('');
     }
 }
