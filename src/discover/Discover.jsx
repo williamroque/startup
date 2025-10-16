@@ -85,9 +85,12 @@ function PredictiveCanvas({ handlePrediction }) {
     );
 }
 
-function InsertButton({ prediction }) {
+function InsertButton({ prediction, handleInsert }) {
     return (
-        <button className={prediction ? 'discover-button' : 'discover-button disabled'}>
+        <button
+            className={prediction ? 'discover-button' : 'discover-button disabled'}
+            onClick={() => handleInsert(prediction)}
+        >
             Insert <span className="discover-button-span">{prediction}</span>
         </button>
     );
@@ -132,13 +135,21 @@ function ControlBox({ prediction }) {
         setPedestalValues([]);
     }
 
+    function handleInsert(prediction) {
+        setPedestalValues([...pedestalValues, prediction]);
+        clearCanvas();
+    }
+
     return (
         <div className="discover-box">
             <div className="discover-clear-buttons">
                 <ClearCanvasButton handleClearCanvas={handleClearCanvas} />
                 <ClearAllButton handleClearAll={handleClearAll} />
             </div>
-            <InsertButton prediction={prediction} />
+            <InsertButton
+                prediction={prediction}
+                handleInsert={handleInsert}
+            />
             <InsertPedestals pedestalValues={pedestalValues} />
         </div>
     );
