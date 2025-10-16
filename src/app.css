@@ -201,4 +201,11 @@ section {
     #form div.form-buttons {
         flex-direction: row;
     }
+
+    .studio-input-table {
+        margin-top: 50px;
+        margin-bottom: 60px;
+        gap: 100px 0;
+        grid-template-rows: 60px 60px;
+    }
 }

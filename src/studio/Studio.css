@@ -1,11 +1,14 @@
 .studio-input-table {
-    margin-top: 10px;
-    margin-bottom: 25vw;
+    margin-top: 4vh;
+    margin-bottom: 5vh;
     display: grid;
+    place-items: center;
     width: 100%;
-    gap: 26vw 2vw;
+    gap: 10vw 0;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 2vw 2vw;
+    grid-template-rows: 1fr 1fr;
+    height: auto;
+    max-width: 600px;
 }
 
 .studio-input-box {
@@ -15,16 +18,18 @@
     text-align: center;
     background: #ccc;
     border-radius: 10px;
-    width: 100%;
+    width: 80%;
     aspect-ratio: 1;
     color: white;
     font-family: 'Noto Sans JP';
-    font-size: 18pt;
+    font-size: 2vw;
     border: none;
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    min-width: 60px;
+    min-height: 60px;
 }
 
 .studio-save-button {
