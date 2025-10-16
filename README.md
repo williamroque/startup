@@ -164,8 +164,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [X] **All functionality implemented or mocked out**
+  - I implemented/mocked out all functionality and included third-party libraries for tasks like Kanji recognition and canvas smoothing
+  - All data is persistent across sessions, but still stored locally (no DB yet)
+  - Mock stroke order video added, still waiting on API
+- [X] **Hooks**
+  - Relied on `useEffect` and `useState` hooks heavily for interactive functionality
 
 ## 🚀 Service deliverable
 
