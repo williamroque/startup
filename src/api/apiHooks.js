@@ -171,9 +171,13 @@ function useDictionary() {
         let storedDictionary = defaultUserDictionary;
 
         if (response?.status === 200) {
-            storedDictionary = fromFullDictionary(
-                await response.json()
-            );
+            const data = await response.json();
+
+            if (data?.length) {
+                storedDictionary = fromFullDictionary(
+                    data
+                );
+            }
         }
 
         setUserDictionary(storedDictionary);
@@ -184,4 +188,4 @@ function useDictionary() {
     return { userDictionary, getDictionary };
 }
 
-export { useLogin, useGallery };
+export { useLogin, useGallery, useDictionary };

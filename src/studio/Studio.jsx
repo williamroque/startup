@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './Studio.css';
@@ -53,7 +53,11 @@ export default function Studio() {
     const { addFrame } = useGallery();
 
     const navigate = useNavigate();
-    const { userDictionary } = useContext(UserDictionaryContext);
+    const { userDictionary, getDictionary } = useContext(UserDictionaryContext);
+
+    useEffect(() => {
+        getDictionary();
+    }, []);
 
     function handleChange(characterName, position) {
         const character = userDictionary.getCharacter(characterName);

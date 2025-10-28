@@ -268,7 +268,11 @@ function DiscoverSection() {
 }
 
 export default function Discover() {
-    const { userDictionary  } = useContext(UserDictionaryContext);
+    const { userDictionary, getDictionary } = useContext(UserDictionaryContext);
+
+    useEffect(() => {
+        getDictionary();
+    });
 
     return (
         <main>

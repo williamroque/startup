@@ -4,7 +4,7 @@ import { NavLink, Routes, Route, useLocation, useNavigate, Navigate } from 'reac
 
 import AuthState from './login/authState';
 
-import { useLogin } from './api/apiHooks';
+import { useDictionary, useLogin } from './api/apiHooks';
 
 import Login from './login/Login';
 import Gallery from './gallery/Gallery';
@@ -28,25 +28,15 @@ export default function App() {
     const navigate = useNavigate();
 
     const { username, authState, authError, logout, create, login } = useLogin();
-
-    let storedDictionary = localStorage.getItem('user-dictionary');
-    if (storedDictionary) {
-        storedDictionary = fromFullDictionary(
-            JSON.parse(storedDictionary)
-        );
-    } else {
-        storedDictionary = defaultUserDictionary;
-    }
-
-    const [ userDictionary, setUserDictionary ] = useState(storedDictionary);
+    const { userDictionary, getDictionary } = useDictionary();
 
     function learnCharacter(character) {
-        setUserDictionary(
-            userDictionary.learnCharacter(character)
-        );
+        // setUserDictionary(
+        //     userDictionary.learnCharacter(character)
+        // );
     }
 
-    const contextValue = { userDictionary, learnCharacter };
+    const contextValue = { userDictionary, getDictionary, learnCharacter };
     const showHeader = (
         authState === AuthState.Authenticated
         && !pathname.startsWith('/definition')
