@@ -28,15 +28,9 @@ export default function App() {
     const navigate = useNavigate();
 
     const { username, authState, authError, logout, create, login } = useLogin();
-    const { userDictionary, getDictionary } = useDictionary();
+    const { userDictionary, getDictionary, addDictionaryCharacter } = useDictionary();
 
-    function learnCharacter(character) {
-        // setUserDictionary(
-        //     userDictionary.learnCharacter(character)
-        // );
-    }
-
-    const contextValue = { userDictionary, getDictionary, learnCharacter };
+    const contextValue = { userDictionary, getDictionary, addDictionaryCharacter };
     const showHeader = (
         authState === AuthState.Authenticated
         && !pathname.startsWith('/definition')

@@ -185,7 +185,26 @@ function useDictionary() {
         return storedDictionary;
     };
 
-    return { userDictionary, getDictionary };
+    const addDictionaryCharacter = async character => {
+        const response = await fetch(`/api/add-character`, {
+            method: 'post',
+            body: JSON.stringify([character.getCharacter()]),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        });
+
+        if (response?.status === 200) {
+            setUserDictionary(
+                userDictionary.learnCharacter(character)
+            );
+            return await response.json();
+        }
+
+        return null;
+    };
+
+    return { userDictionary, getDictionary, addDictionaryCharacter };
 }
 
 export { useLogin, useGallery, useDictionary };
