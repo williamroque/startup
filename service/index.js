@@ -7,7 +7,6 @@ const app = express();
 const authCookieName = 'token';
 
 let users = [];
-let galleries = {};
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
@@ -69,24 +68,31 @@ apiRouter.get('/gallery/:username', verifyAuth, async (req, res) => {
         if (!user) {
             res.status(404).send({ msg: 'User does not exist' });
         } else {
-            res.send(galleries[user.username]);
+            res.send(user.gallery);
         }
     } else {
         const user = await findUser('token', req.cookies[authCookieName]);
-        res.send(galleries[user.username]);
+        res.send(user.gallery);
     }
 });
 
 apiRouter.get('/gallery', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
-    res.send(galleries[user.username]);
+    res.send(galleries[user.gallery]);
 });
 
 apiRouter.post('/add-frame', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
-    galleries[user.username].push(req.body);
+    user.gallery.push(req.body);
 
-    res.send(galleries[user.username]);
+    res.send(user.gallery);
+});
+
+apiRouter.post('/remove-frame', verifyAuth, async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    user.gallery = user.gallery.filter(frame => frame.id !== req.body.id);
+
+    res.send(user.gallery);
 });
 
 app.use(function (err, req, res, next) {
