@@ -174,7 +174,7 @@ export default function Gallery({ username }) {
     return (
         <main>
             <h1>Gallery</h1>
-            <h2>Welcome back, <i>{ username}-san</i></h2>
+            <h2>Welcome back, <i>{username}-san</i></h2>
             { userVisit ? (
                 <div id="gallery-visit-indicator"><i>{userVisit}</i> just visited your gallery.</div>
             ) : ''}
