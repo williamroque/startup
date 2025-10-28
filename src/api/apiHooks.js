@@ -110,15 +110,27 @@ function useGallery() {
     };
 
     const addFrame = async frame => {
+        let data = {};
+        for (const position in frame._items) {
+            const item = frame._items[position];
+
+            if (!item.isEmpty()) {
+                data[position] = item.getLabel();
+            }
+        }
+
+        data['id'] = frame._id;
+
         const response = await fetch(`/api/add-frame`, {
             method: 'post',
-            body: JSON.stringify(frame),
+            body: JSON.stringify(data),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             }
         });
 
         if (response?.status === 200) {
+            setFrames([...frames, frame]);
             return await response.json();
         }
 

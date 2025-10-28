@@ -60,25 +60,6 @@ export class Frame {
         ).join('');
     }
 
-    save() {
-        let frames = JSON.parse(window.localStorage.getItem('gallery-frames')) || [];
-        
-        let data = {};
-        for (const position in this._items) {
-            const item = this._items[position];
-
-            if (!item.isEmpty()) {
-                data[position] = item.getLabel();
-            }
-        }
-
-        data['id'] = this._id;
-
-        frames.push(data);
-
-        window.localStorage.setItem('gallery-frames', JSON.stringify(frames));
-    }
-
     delete() {
         let frames = JSON.parse(window.localStorage.getItem('gallery-frames')) || [];
         frames = frames.filter(frame => frame.id !== this._id);

@@ -7,6 +7,8 @@ import { GalleryCanvas } from '../gallery/Gallery';
 import { Frame } from '../data/galleryData';
 import { UserDictionaryContext } from '../data/dictionaryData';
 
+import { useGallery } from '../api/apiHooks';
+
 
 function InputBox({ handleChange, position }) {
     const { userDictionary } = useContext(UserDictionaryContext);
@@ -48,6 +50,7 @@ function InputTable({ handleChange }) {
 
 export default function Studio() {
     const [ frame, setFrame ] = useState(new Frame());
+    const { addFrame } = useGallery();
 
     const navigate = useNavigate();
     const { userDictionary } = useContext(UserDictionaryContext);
@@ -66,7 +69,7 @@ export default function Studio() {
                 <button
                     className="studio-save-button"
                     onClick={() => {
-                        frame.save();
+                        addFrame(frame);
                         navigate('/gallery');
                         window.scrollTo(0, 0);
                     }}
