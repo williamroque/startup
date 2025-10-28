@@ -121,7 +121,7 @@ function useGallery() {
 
         data['id'] = frame._id;
 
-        const response = await fetch(`/api/add-frame`, {
+        const response = await fetch('/api/add-frame', {
             method: 'post',
             body: JSON.stringify(data),
             headers: {
@@ -138,7 +138,7 @@ function useGallery() {
     };
 
     const removeFrame = async frame => {
-        const response = await fetch(`/api/remove-frame`, {
+        const response = await fetch('/api/remove-frame', {
             method: 'post',
             body: JSON.stringify({ id: frame._id }),
             headers: {
@@ -161,7 +161,7 @@ function useDictionary() {
     const [ userDictionary, setUserDictionary ] = useState(defaultUserDictionary);
 
     const getDictionary = async () => {
-        const response = await fetch(`/api/user-dictionary`, {
+        const response = await fetch('/api/user-dictionary', {
             method: 'get',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
@@ -186,7 +186,7 @@ function useDictionary() {
     };
 
     const addDictionaryCharacter = async character => {
-        const response = await fetch(`/api/add-character`, {
+        const response = await fetch('/api/add-character', {
             method: 'post',
             body: JSON.stringify([character.getCharacter()]),
             headers: {
@@ -207,8 +207,37 @@ function useDictionary() {
     return { userDictionary, getDictionary, addDictionaryCharacter };
 }
 
+function useStrokeOrder() {
+    const [ videoURL, setVideoURL ] = useState(null);
+
+    const getVideoURL = async character => {
+        const response = await fetch(`/api/stroke-order-url/${character}`, {
+            method: 'get',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+                'x-rapidapi-key': '3b6920303cmshefdcf776b96e2b5p13d261jsnbd43d6be6670',
+                'x-rapidapi-host': 'kanjialive-api.p.rapidapi.com'
+            }
+        });
+
+        if (response?.status === 200) {
+            const data = await response.json();
+            const url = data.url;
+
+            setVideoURL(url);
+
+            return url;
+        }
+
+        setVideoURL(null);
+        return null;
+    };
+
+    return { videoURL, getVideoURL };
+}
+
 async function getUserList() {
-    const response = await fetch(`/api/user-list`, {
+    const response = await fetch('/api/user-list', {
         method: 'get',
         headers: {
             'Content-type': 'application/json; charset=UTF-8'
@@ -218,8 +247,8 @@ async function getUserList() {
     if (response?.status === 200) {
         return await response.json();
     }
-    
+
     return null;
 }
 
-export { useLogin, useGallery, useDictionary, getUserList };
+export { useLogin, useGallery, useDictionary, useStrokeOrder, getUserList };

@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
 const app = express();
+const { rapidAPIKey } = require('./keys');
 
 const authCookieName = 'token';
 
@@ -88,6 +89,28 @@ apiRouter.get('/user-dictionary', verifyAuth, async (req, res) => {
 
 apiRouter.get('/user-list', verifyAuth, async (req, res) => {
     res.send(users.map(user => user.username));
+});
+
+apiRouter.get('/stroke-order-url/:character', verifyAuth, async (req, res) => {
+    const { character } = req.params;
+    
+    const response = await fetch(`https://kanjialive-api.p.rapidapi.com/api/public/kanji/${character}`, {
+        method: 'get',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            'x-rapidapi-key': rapidAPIKey,
+            'x-rapidapi-host': 'kanjialive-api.p.rapidapi.com'
+        }
+    });
+
+    if (response?.status === 200) {
+        const data = await response.json();
+        const url = data.kanji.video.mp4;
+
+        res.send({ url });
+    } else {
+        res.status(response.status).send(null);
+    }
 });
 
 apiRouter.post('/add-frame', verifyAuth, async (req, res) => {
