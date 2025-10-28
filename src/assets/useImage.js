@@ -10,7 +10,7 @@ const useImage = imageName => {
     useEffect(() => {
         const fetchImage = async () => {
             try {
-                const response = await import(`./representations/${imageName}.png`);
+                const response = await import(`./representations/${imageName}.webp`);
                 setImage(response.default);
             } catch (err) {
                 setError(err);

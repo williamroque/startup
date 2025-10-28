@@ -1,7 +1,11 @@
-const config = {
-    server: {
-        host: '0.0.0.0'
-    }
-};
+import { defineConfig } from 'vite';
 
-export default config;
+
+export default defineConfig({
+    server: {
+        proxy: {
+            '/api': 'http://localhost:4000',
+        },
+        host: '0.0.0.0'
+    },
+});
