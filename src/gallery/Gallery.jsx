@@ -3,9 +3,6 @@ import React, { useRef, useState, useEffect } from 'react';
 
 import { useGallery } from '../api/apiHooks';
 
-import { Frame, Item } from '../data/galleryData';
-import { Character, fullDictionary } from '../data/dictionaryData';
-
 import closeIcon from '../assets/icons/close.svg';
 
 const positionNudges = {

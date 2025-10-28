@@ -1,16 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import AuthState from './authState';
 
 import './Login.css';
 
 export default function Login({ onCreate, onLogin, authError }) {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
-
-    const navigate = useNavigate();
 
     return (
         <main>
@@ -30,8 +25,13 @@ export default function Login({ onCreate, onLogin, authError }) {
                         setPassword(e.target.value);
                     }}
                 />
-                <p>Incorrect username or password.</p>
-                <p>An account with that username already exists.</p>
+
+                {authError === 401 ? (
+                    <p>Incorrect username or password.</p>
+                ) : authError === 409 ? (
+                    <p>An account with that username already exists.</p>
+                ) : ''}
+
                 <div className="form-buttons">
                     <button
                         onClick={() => {
