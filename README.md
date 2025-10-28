@@ -175,12 +175,18 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service**
+  - Added Express service.
+- [x] **Static middleware for frontend**
+  - I used Express's static middleware.
+- [x] **Calls to third party endpoints**
+  - Due to CORS, I moved third party API calls to the backend and used an Express endpoint.
+- [x] **Backend service endpoints**
+  - I added the relevant Node.js code for each endpoint.
+- [x] **Frontend calls service endpoints**
+  - Created custom hooks to handle API calls.
+- [x] **Supports registration, login, logout, and restricted endpoint**
+  - I added these features. User data is saved in memory while DB is not implemented.
 
 
 ## 🚀 DB deliverable
