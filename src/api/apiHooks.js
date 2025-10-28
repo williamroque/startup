@@ -71,4 +71,25 @@ function useLogin() {
     return { username, authState, authError, login, create, logout };
 }
 
-export { useLogin };
+function useGallery() {
+    const [ frames, setFrames ] = useState(null);
+
+    const getFrames = async username => {
+        const response = await fetch(`/api/gallery/${username}`, {
+            method: 'get',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        });
+
+        if (response?.status === 200) {
+            return await response.json();
+        }
+
+        return null;
+    };
+
+    return { getFrames };
+}
+
+export { useLogin, useGallery };
