@@ -6,6 +6,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
+        "service": "trash dist && trash service/public && vite build && mkdir -p service/public && cp -nR dist/* service/public && cd service && node index.js",
         "preview": "vite preview"
     },
     "repository": {
