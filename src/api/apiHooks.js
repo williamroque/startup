@@ -207,4 +207,19 @@ function useDictionary() {
     return { userDictionary, getDictionary, addDictionaryCharacter };
 }
 
-export { useLogin, useGallery, useDictionary };
+async function getUserList() {
+    const response = await fetch(`/api/user-list`, {
+        method: 'get',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+    });
+
+    if (response?.status === 200) {
+        return await response.json();
+    }
+    
+    return null;
+}
+
+export { useLogin, useGallery, useDictionary, getUserList };
