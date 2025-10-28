@@ -86,6 +86,10 @@ apiRouter.get('/user-dictionary', verifyAuth, async (req, res) => {
     res.send(user.dictionary);
 });
 
+apiRouter.get('/user-list', verifyAuth, async (req, res) => {
+    res.send(users.map(user => user.username));
+});
+
 apiRouter.post('/add-frame', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     user.gallery.push(req.body);
