@@ -59,11 +59,4 @@ export class Frame {
             item => item.getLabel()
         ).join('');
     }
-
-    delete() {
-        let frames = JSON.parse(window.localStorage.getItem('gallery-frames')) || [];
-        frames = frames.filter(frame => frame.id !== this._id);
-
-        window.localStorage.setItem('gallery-frames', JSON.stringify(frames));
-    }
 }

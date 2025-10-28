@@ -136,7 +136,7 @@ export function GalleryRow({ frame, handleDeleteFrame, hideDelete }) {
 }
 
 export default function Gallery({ username }) {
-    const { getFrames, frames } = useGallery();
+    const { getFrames, removeFrame, frames } = useGallery();
 
     useEffect(() => {
         getFrames(username);
@@ -157,8 +157,7 @@ export default function Gallery({ username }) {
     }, []);
 
     function handleDeleteFrame(frame) {
-        setFrames(frames.filter(f => f._id !== frame._id));
-        frame.delete();
+        removeFrame(frame);
     }
     
     return (

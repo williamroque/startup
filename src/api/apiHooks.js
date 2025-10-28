@@ -137,7 +137,24 @@ function useGallery() {
         return null;
     };
 
-    return { getFrames, addFrame, frames };
+    const removeFrame = async frame => {
+        const response = await fetch(`/api/remove-frame`, {
+            method: 'post',
+            body: JSON.stringify({ id: frame._id }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        });
+
+        if (response?.status === 200) {
+            setFrames(frames.filter(f => f._id !== frame._id));
+            return await response.json();
+        }
+
+        return null;
+    };
+
+    return { getFrames, addFrame, removeFrame, frames };
 }
 
 export { useLogin, useGallery };
