@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import AuthState from '../login/authState';
 import { Item, Frame } from '../data/galleryData';
-import { fullDictionary } from '../data/dictionaryData';
+import { fullDictionary, fromFullDictionary, defaultUserDictionary } from '../data/dictionaryData';
 
 function useLogin() {
     const [ username, setUsername ] = useState(
@@ -155,6 +155,33 @@ function useGallery() {
     };
 
     return { getFrames, addFrame, removeFrame, frames };
+}
+
+function useDictionary() {
+    const [ userDictionary, setUserDictionary ] = useState(defaultUserDictionary);
+
+    const getDictionary = async () => {
+        const response = await fetch(`/api/user-dictionary`, {
+            method: 'get',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        });
+
+        let storedDictionary = defaultUserDictionary;
+
+        if (response?.status === 200) {
+            storedDictionary = fromFullDictionary(
+                await response.json()
+            );
+        }
+
+        setUserDictionary(storedDictionary);
+
+        return storedDictionary;
+    };
+
+    return { userDictionary, getDictionary };
 }
 
 export { useLogin, useGallery };

@@ -81,11 +81,23 @@ apiRouter.get('/gallery', verifyAuth, async (req, res) => {
     res.send(user.gallery);
 });
 
+apiRouter.get('/user-dictionary', verifyAuth, async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    res.send(user.dictionary);
+});
+
 apiRouter.post('/add-frame', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     user.gallery.push(req.body);
 
     res.send(user.gallery);
+});
+
+apiRouter.post('/add-character', verifyAuth, async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    user.dictionary.push(req.body);
+
+    res.send(user.dictionary);
 });
 
 apiRouter.post('/remove-frame', verifyAuth, async (req, res) => {
