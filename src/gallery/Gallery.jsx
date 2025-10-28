@@ -136,31 +136,10 @@ export function GalleryRow({ frame, handleDeleteFrame, hideDelete }) {
 }
 
 export default function Gallery({ username }) {
-    const { getFrames } = useGallery();
+    const { getFrames, frames } = useGallery();
 
-    const [frames, setFrames] = useState([]);
-
-    useEffect(async () => {
-        let frameData = await getFrames(username);
-
-        if (frameData === null) {
-            return [];
-        }
-
-        frameData = frameData.map(frame => {
-            let items = {};
-
-            for (const position in frame) {
-                if (position !== 'id') {
-                    const character = frame[position];
-                    items[position] = new Item(fullDictionary.getCharacter(character));
-                }
-            }
-
-            return new Frame(items, frame.id);
-        });
-
-        setFrames(frameData);
+    useEffect(() => {
+        getFrames(username);
     }, []);
 
     const [userVisit, setUserVisit] = useState(null);

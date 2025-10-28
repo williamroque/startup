@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
+
 import AuthState from '../login/authState';
+import { Item, Frame } from '../data/galleryData';
+import { fullDictionary } from '../data/dictionaryData';
 
 function useLogin() {
     const [ username, setUsername ] = useState(
@@ -72,11 +75,44 @@ function useLogin() {
 }
 
 function useGallery() {
-    const [ frames, setFrames ] = useState(null);
+    const [ frames, setFrames ] = useState([]);
 
     const getFrames = async username => {
         const response = await fetch(`/api/gallery/${username}`, {
             method: 'get',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        });
+
+        if (response?.status === 200) {
+            let frameData = await response.json();
+
+            frameData = frameData.map(frame => {
+                let items = {};
+
+                for (const position in frame) {
+                    if (position !== 'id') {
+                        const character = frame[position];
+                        items[position] = new Item(fullDictionary.getCharacter(character));
+                    }
+                }
+
+                return new Frame(items, frame.id);
+            });
+
+            setFrames(frameData);
+
+            return frameData;
+        }
+
+        return null;
+    };
+
+    const addFrame = async frame => {
+        const response = await fetch(`/api/add-frame`, {
+            method: 'post',
+            body: JSON.stringify(frame),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             }
@@ -89,7 +125,7 @@ function useGallery() {
         return null;
     };
 
-    return { getFrames };
+    return { getFrames, addFrame, frames };
 }
 
 export { useLogin, useGallery };
