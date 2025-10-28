@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { fullDictionary } from '../data/dictionaryData';
@@ -7,6 +7,7 @@ import useImage from '../assets/useImage';
 import './Definition.css';
 
 import arrowBack from '../assets/icons/arrow_back.svg';
+import { useStrokeOrder } from '../api/apiHooks';
 
 function ReturnButton() {
     const navigate = useNavigate();
@@ -45,13 +46,18 @@ function CharacterDefinition({ character }) {
 }
 
 function StrokeOrder({ character }) {
+    const { videoURL, getVideoURL } = useStrokeOrder();
+
+    useEffect(() => {
+        getVideoURL(character.getCharacter());
+    }, []);
+
     return (
         <section className="stroke-order-section">
             <video
-                src="https://media.kanjialive.com/kanji_animations/kanji_mp4/otozu(reru)_00.mp4"
+                src={videoURL}
                 autoPlay
                 muted
-                loop
                 controls
             ></video>
         </section>
