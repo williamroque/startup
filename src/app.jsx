@@ -4,6 +4,8 @@ import { NavLink, Routes, Route, useLocation, useNavigate, Navigate } from 'reac
 
 import AuthState from './login/authState';
 
+import { useLogin } from './api/apiHooks';
+
 import Login from './login/Login';
 import Gallery from './gallery/Gallery';
 import Studio from './studio/Studio';
@@ -25,12 +27,7 @@ export default function App() {
     const { pathname } = useLocation();
     const navigate = useNavigate();
 
-    const [ username, setUsername ] = useState(
-        localStorage.getItem('username')
-    );
-    const [ authState, setAuthState ] = useState(
-        username ? AuthState.Authenticated : AuthState.Unauthenticated
-    );
+    const { username, authState, authError, logout, create, login } = useLogin();
 
     let storedDictionary = localStorage.getItem('user-dictionary');
     if (storedDictionary) {
@@ -81,13 +78,7 @@ export default function App() {
                             </NavLink>
                             <a
                                 className="nav-link"
-                                onClick={() => {
-                                    setUsername('');
-                                    localStorage.setItem('username', '');
-                                    setAuthState(AuthState.Unauthenticated);
-
-                                    navigate('/');
-                                }}
+                                onClick={logout}
                             >
                                 <img src={logoutIcon}></img>
                                 <span>Log out</span>
@@ -109,10 +100,21 @@ export default function App() {
                     ) : ''}
                     <Route path="/login" element={
                         <Login
-                            onAuthStateChange={(username, authState) => {
-                                setUsername(username);
-                                setAuthState(authState);
+                            onCreate={async (username, password) => {
+                                const status = await create(username, password);
+
+                                if (status === 200) {
+                                    navigate('/gallery');
+                                }
                             }}
+                            onLogin={async (username, password) => {
+                                const status = await login(username, password);
+
+                                if (status === 200) {
+                                    navigate('/gallery');
+                                }
+                            }}
+                            authError={authError}
                         />
                     } />
                     <Route
