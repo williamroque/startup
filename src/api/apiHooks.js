@@ -21,12 +21,14 @@ function useLogin() {
 
         if (response?.status === 200) {
             localStorage.setItem('username', username);
-            setAuthState(AuthState.Authenticated);
             setAuthError(null);
+            setAuthState(AuthState.Authenticated);
+            setUsername(username);
         } else {
-            const body = await response.json();
-            setAuthError(body.msg);
+            setAuthError(response?.status);
         }
+
+        return response?.status;
     };
 
     const create = async (username, password) => {
@@ -40,12 +42,14 @@ function useLogin() {
 
         if (response?.status === 200) {
             localStorage.setItem('username', username);
-            setAuthState(AuthState.Authenticated);
             setAuthError(null);
+            setAuthState(AuthState.Authenticated);
+            setUsername(username);
         } else {
-            const body = await response.json();
-            setAuthError(body.msg);
+            setAuthError(response?.status);
         }
+
+        return response?.status;
     };
 
     const logout = async () => {
@@ -56,9 +60,12 @@ function useLogin() {
             }
         });
 
-        localStorage.setItem('username', undefined);
+        localStorage.removeItem('username');
         setAuthState(AuthState.Unauthenticated);
         setAuthError(null);
+        setUsername(null);
+
+        return response?.status;
     };
 
     return { username, authState, authError, login, create, logout };
