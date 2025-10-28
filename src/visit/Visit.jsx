@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Visit.css';
+import { getUserList } from '../api/apiHooks';
 
-export default function Visit() {
+export default function Visit({ username }) {
+    const [ users, setUsers ] = useState([]);
+
+    useEffect(() => {
+        getUserList().then(users => {
+            setUsers(users);
+        });
+    }, []);
+
+
     return (
         <main>
             <h1>Visit</h1>
             <section>
                 <ul className="visit-users-list">
-                    <li><a href="/visit-gallery/robbysmith">robbysmith</a></li>
-                    <li><a href="/visit-gallery/jenniferjohnson">jenniferjohnson</a></li>
-                    <li><a href="/visit-gallery/sammywilson">sammywilson</a></li>
-                    <li><a href="/visit-gallery/jonathanrhodes">jonathanrhodes</a></li>
+                    {users.filter(user => user !== username).map(user => {
+                        return <li key={user}><a href={'/visit-gallery/' + user}>{user}</a></li>;
+                    })}
                 </ul>
             </section>
         </main>

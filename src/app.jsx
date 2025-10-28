@@ -78,7 +78,7 @@ export default function App() {
                             <Route path="/studio" element={<Studio />} />
                             <Route path="/definition/:character" element={<Definition />} />
                             <Route path="/discover" element={<Discover />} />
-                            <Route path="/visit" element={<Visit />} />
+                            <Route path="/visit" element={<Visit username={username} />} />
                             <Route path="/visit-gallery/:user" element={<VisitGallery />} />
                         </>
                     ) : ''}
