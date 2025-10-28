@@ -6,7 +6,7 @@ import AuthState from './authState';
 
 import './Login.css';
 
-export default function Login({ onAuthStateChange }) {
+export default function Login({ onCreate, onLogin, authError }) {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
 
@@ -35,17 +35,18 @@ export default function Login({ onAuthStateChange }) {
                 <div className="form-buttons">
                     <button
                         onClick={() => {
-                            localStorage.setItem('username', username);
-                            localStorage.setItem('password', password);
-
-                            onAuthStateChange(username, AuthState.Authenticated);
-
-                            navigate('/gallery');
+                            onLogin(username, password);
                         }}
                     >
                         Log in
                     </button>
-                    <button>Create account</button>
+                    <button
+                        onClick={() => {
+                            onCreate(username, password);
+                        }}
+                    >
+                        Create account
+                    </button>
                 </div>
             </div>
         </main>
