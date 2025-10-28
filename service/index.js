@@ -78,7 +78,7 @@ apiRouter.get('/gallery/:username', verifyAuth, async (req, res) => {
 
 apiRouter.get('/gallery', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
-    res.send(galleries[user.gallery]);
+    res.send(user.gallery);
 });
 
 apiRouter.post('/add-frame', verifyAuth, async (req, res) => {
@@ -110,9 +110,9 @@ async function createUser(username, password) {
         username: username,
         password: passwordHash,
         token: uuid.v4(),
+        gallery: []
     };
     users.push(user);
-    galleries[username] = [];
 
     return user;
 }
