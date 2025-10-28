@@ -1,6 +1,8 @@
 import './Gallery.css';
 import React, { useRef, useState, useEffect } from 'react';
 
+import { useGallery } from '../api/apiHooks';
+
 import { Frame, Item } from '../data/galleryData';
 import { Character, fullDictionary } from '../data/dictionaryData';
 
@@ -134,8 +136,17 @@ export function GalleryRow({ frame, handleDeleteFrame, hideDelete }) {
 }
 
 export default function Gallery({ username }) {
-    const [frames, setFrames] = useState(() => {
-        let frameData = JSON.parse(window.localStorage.getItem('gallery-frames')) || [];
+    const { getFrames } = useGallery();
+
+    const [frames, setFrames] = useState([]);
+
+    useEffect(async () => {
+        let frameData = await getFrames(username);
+
+        if (frameData === null) {
+            return [];
+        }
+
         frameData = frameData.map(frame => {
             let items = {};
 
@@ -149,8 +160,8 @@ export default function Gallery({ username }) {
             return new Frame(items, frame.id);
         });
 
-        return frameData;
-    });
+        setFrames(frameData);
+    }, []);
 
     const [userVisit, setUserVisit] = useState(null);
 
