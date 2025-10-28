@@ -95,7 +95,7 @@ apiRouter.post('/add-frame', verifyAuth, async (req, res) => {
 
 apiRouter.post('/add-character', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
-    user.dictionary.push(req.body);
+    user.dictionary.push(...req.body);
 
     res.send(user.dictionary);
 });
@@ -123,7 +123,7 @@ async function createUser(username, password) {
         password: passwordHash,
         token: uuid.v4(),
         gallery: [],
-        dictionary: []
+        dictionary: ['石', '水', '木', '土', '金', '火']
     };
     users.push(user);
 
