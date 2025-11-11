@@ -68,15 +68,6 @@ export class DictionaryData {
             }
         }
     }
-
-    save(dictionaryName) {
-        localStorage.setItem(
-            dictionaryName,
-            JSON.stringify(
-                Object.keys(this._characters)
-            )
-        );
-    }
 }
 
 export const fullDictionary = new DictionaryData({

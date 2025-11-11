@@ -216,7 +216,7 @@ function DiscoverSection() {
         if (newCharacter) {
             timer = setTimeout(() => {
                 setNewCharacter(null);
-            }, 5000);
+            }, 2500);
         }
 
         return () => clearTimeout(timer);
@@ -241,7 +241,6 @@ function DiscoverSection() {
             setNewCharacter(character);
 
             addDictionaryCharacter(character);
-            userDictionary.save('user-dictionary');
         }
     }
     
