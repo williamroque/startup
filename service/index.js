@@ -2,12 +2,20 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
+
 const app = express();
+
+const {
+    getUser,
+    getUserByToken,
+    addUser,
+    updateUser,
+    getUserList
+} = require('./database');
+
 const { rapidAPIKey } = require('./keys');
 
 const authCookieName = 'token';
-
-let users = [];
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -19,7 +27,7 @@ const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 apiRouter.post('/auth/create', async (req, res) => {
-    if (await findUser('username', req.body.username)) {
+    if (await getUser(req.body.username)) {
         res.status(409).send({ msg: 'User already exists' });
     } else {
         const user = await createUser(req.body.username, req.body.password);
@@ -30,7 +38,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 });
 
 apiRouter.post('/auth/login', async (req, res) => {
-    const user = await findUser('username', req.body.username);
+    const user = await getUser(req.body.username);
     if (user) {
         if (await bcrypt.compare(req.body.password, user.password)) {
             user.token = uuid.v4();
@@ -43,16 +51,16 @@ apiRouter.post('/auth/login', async (req, res) => {
 });
 
 apiRouter.delete('/auth/logout', async (req, res) => {
-    const user = await findUser('token', req.cookies[authCookieName]);
+    const user = await getUserByToken(req.cookies[authCookieName]);
     if (user) {
-        delete user.token;
+        await updateUser(user.username, { token: null });
     }
     res.clearCookie(authCookieName);
     res.status(204).end();
 });
 
 const verifyAuth = async (req, res, next) => {
-    const user = await findUser('token', req.cookies[authCookieName]);
+    const user = await getUserByToken(req.cookies[authCookieName]);
     if (user) {
         next();
     } else {
@@ -64,7 +72,7 @@ apiRouter.get('/gallery/:username', verifyAuth, async (req, res) => {
     const { username } = req.params;
 
     if (username) {
-        const user = await findUser('username', username);
+        const user = await getUser(username);
 
         if (!user) {
             res.status(404).send({ msg: 'User does not exist' });
@@ -72,23 +80,23 @@ apiRouter.get('/gallery/:username', verifyAuth, async (req, res) => {
             res.send(user.gallery);
         }
     } else {
-        const user = await findUser('token', req.cookies[authCookieName]);
+        const user = await getUserByToken(req.cookies[authCookieName]);
         res.send(user.gallery);
     }
 });
 
 apiRouter.get('/gallery', verifyAuth, async (req, res) => {
-    const user = await findUser('token', req.cookies[authCookieName]);
+    const user = await getUserByToken(req.cookies[authCookieName]);
     res.send(user.gallery);
 });
 
 apiRouter.get('/user-dictionary', verifyAuth, async (req, res) => {
-    const user = await findUser('token', req.cookies[authCookieName]);
+    const user = await getUserByToken(req.cookies[authCookieName]);
     res.send(user.dictionary);
 });
 
 apiRouter.get('/user-list', verifyAuth, async (req, res) => {
-    res.send(users.map(user => user.username));
+    res.send(await getUserList());
 });
 
 apiRouter.get('/stroke-order-url/:character', verifyAuth, async (req, res) => {
@@ -114,22 +122,25 @@ apiRouter.get('/stroke-order-url/:character', verifyAuth, async (req, res) => {
 });
 
 apiRouter.post('/add-frame', verifyAuth, async (req, res) => {
-    const user = await findUser('token', req.cookies[authCookieName]);
+    const user = await getUserByToken(req.cookies[authCookieName]);
     user.gallery.push(req.body);
+    await updateUser(user.username, { gallery: user.gallery });
 
     res.send(user.gallery);
 });
 
 apiRouter.post('/add-character', verifyAuth, async (req, res) => {
-    const user = await findUser('token', req.cookies[authCookieName]);
-    user.dictionary.push(...req.body);
+    const user = await getUserByToken(req.cookies[authCookieName]);
+    user.dictionary.push(...[].concat(req.body));
+    await updateUser(user.username, { dictionary: user.dictionary });
 
     res.send(user.dictionary);
 });
 
 apiRouter.post('/remove-frame', verifyAuth, async (req, res) => {
-    const user = await findUser('token', req.cookies[authCookieName]);
+    const user = await getUserByToken(req.cookies[authCookieName]);
     user.gallery = user.gallery.filter(frame => frame.id !== req.body.id);
+    await updateUser(user.username, { gallery: user.gallery });
 
     res.send(user.gallery);
 });
@@ -152,15 +163,9 @@ async function createUser(username, password) {
         gallery: [],
         dictionary: ['石', '水', '木', '土', '金', '火']
     };
-    users.push(user);
-
+    
+    await addUser(user);
     return user;
-}
-
-async function findUser(field, value) {
-    if (!value) return null;
-
-    return users.find((u) => u[field] === value);
 }
 
 function setAuthCookie(res, authToken) {
