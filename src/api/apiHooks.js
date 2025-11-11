@@ -74,7 +74,7 @@ function useLogin() {
     return { username, authState, authError, login, create, logout };
 }
 
-function useGallery() {
+function useGallery(logout) {
     const [ frames, setFrames ] = useState([]);
 
     const getFrames = async username => {
@@ -84,6 +84,11 @@ function useGallery() {
                 'Content-type': 'application/json; charset=UTF-8'
             }
         });
+
+        if (response?.status === 401) {
+            if (logout) logout();
+            return null;
+        }
 
         if (response?.status === 200) {
             let frameData = await response.json();
@@ -129,6 +134,11 @@ function useGallery() {
             }
         });
 
+        if (response?.status === 401) {
+            if (logout) logout();
+            return null;
+        }
+
         if (response?.status === 200) {
             setFrames([...frames, frame]);
             return await response.json();
@@ -146,6 +156,11 @@ function useGallery() {
             }
         });
 
+        if (response?.status === 401) {
+            if (logout) logout();
+            return null;
+        }
+
         if (response?.status === 200) {
             setFrames(frames.filter(f => f._id !== frame._id));
             return await response.json();
@@ -157,7 +172,7 @@ function useGallery() {
     return { getFrames, addFrame, removeFrame, frames };
 }
 
-function useDictionary() {
+function useDictionary(logout) {
     const [ userDictionary, setUserDictionary ] = useState(defaultUserDictionary);
 
     const getDictionary = async () => {
@@ -169,6 +184,11 @@ function useDictionary() {
         });
 
         let storedDictionary = defaultUserDictionary;
+
+        if (response?.status === 401) {
+            if (logout) logout();
+            return null;
+        }
 
         if (response?.status === 200) {
             const data = await response.json();
@@ -194,6 +214,11 @@ function useDictionary() {
             }
         });
 
+        if (response?.status === 401) {
+            if (logout) logout();
+            return null;
+        }
+
         if (response?.status === 200) {
             setUserDictionary(
                 userDictionary.learnCharacter(character)
@@ -207,7 +232,7 @@ function useDictionary() {
     return { userDictionary, getDictionary, addDictionaryCharacter };
 }
 
-function useStrokeOrder() {
+function useStrokeOrder(logout) {
     const [ videoURL, setVideoURL ] = useState(null);
 
     const getVideoURL = async character => {
@@ -219,6 +244,11 @@ function useStrokeOrder() {
                 'x-rapidapi-host': 'kanjialive-api.p.rapidapi.com'
             }
         });
+
+        if (response?.status === 401) {
+            if (logout) logout();
+            return null;
+        }
 
         if (response?.status === 200) {
             const data = await response.json();
@@ -236,13 +266,18 @@ function useStrokeOrder() {
     return { videoURL, getVideoURL };
 }
 
-async function getUserList() {
+async function getUserList(logout) {
     const response = await fetch('/api/user-list', {
         method: 'get',
         headers: {
             'Content-type': 'application/json; charset=UTF-8'
         }
     });
+
+    if (response?.status === 401) {
+        if (logout) logout();
+        return null;
+    }
 
     if (response?.status === 200) {
         return await response.json();
