@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './Visit.css';
 import { getUserList } from '../api/apiHooks';
 
-export default function Visit({ username }) {
+export default function Visit({ username, logout }) {
     const [ users, setUsers ] = useState([]);
 
     useEffect(() => {
-        getUserList().then(users => {
+        getUserList(logout).then(users => {
             setUsers(users);
         });
     }, []);

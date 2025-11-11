@@ -6,11 +6,11 @@ import { useGallery } from '../api/apiHooks';
 
 import arrowBack from '../assets/icons/arrow_back.svg';
 
-export default function VisitGallery() {
+export default function VisitGallery({ logout }) {
     const navigate = useNavigate();
     const { user } = useParams();
 
-    const { getFrames, frames } = useGallery();
+    const { getFrames, frames } = useGallery(logout);
 
     useEffect(() => {
         getFrames(user);

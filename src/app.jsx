@@ -28,7 +28,7 @@ export default function App() {
     const navigate = useNavigate();
 
     const { username, authState, authError, logout, create, login } = useLogin();
-    const { userDictionary, getDictionary, addDictionaryCharacter } = useDictionary();
+    const { userDictionary, getDictionary, addDictionaryCharacter } = useDictionary(logout);
 
     const contextValue = { userDictionary, getDictionary, addDictionaryCharacter };
     const showHeader = (
@@ -74,12 +74,12 @@ export default function App() {
                 <Routes>
                     {authState === AuthState.Authenticated ? (
                         <>
-                            <Route path="/gallery" element={<Gallery username={username} />} />
-                            <Route path="/studio" element={<Studio />} />
-                            <Route path="/definition/:character" element={<Definition />} />
+                            <Route path="/gallery" element={<Gallery username={username} logout={logout} />} />
+                            <Route path="/studio" element={<Studio logout={logout} />} />
+                            <Route path="/definition/:character" element={<Definition logout={logout} />} />
                             <Route path="/discover" element={<Discover />} />
-                            <Route path="/visit" element={<Visit username={username} />} />
-                            <Route path="/visit-gallery/:user" element={<VisitGallery />} />
+                            <Route path="/visit" element={<Visit username={username} logout={logout} />} />
+                            <Route path="/visit-gallery/:user" element={<VisitGallery logout={logout} />} />
                         </>
                     ) : ''}
                     <Route path="/login" element={

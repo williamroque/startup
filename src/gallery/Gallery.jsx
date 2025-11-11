@@ -132,8 +132,8 @@ export function GalleryRow({ frame, handleDeleteFrame, hideDelete }) {
     );
 }
 
-export default function Gallery({ username }) {
-    const { getFrames, removeFrame, frames } = useGallery();
+export default function Gallery({ username, logout }) {
+    const { getFrames, removeFrame, frames } = useGallery(logout);
 
     useEffect(() => {
         getFrames(username);

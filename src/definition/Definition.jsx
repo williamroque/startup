@@ -45,8 +45,8 @@ function CharacterDefinition({ character }) {
     );
 }
 
-function StrokeOrder({ character }) {
-    const { videoURL, getVideoURL } = useStrokeOrder();
+function StrokeOrder({ character, logout }) {
+    const { videoURL, getVideoURL } = useStrokeOrder(logout);
 
     useEffect(() => {
         getVideoURL(character.getCharacter());
@@ -64,7 +64,7 @@ function StrokeOrder({ character }) {
     );
 }
 
-export default function Definition() {
+export default function Definition({ logout }) {
     const { character } = useParams();
     const characterObject = fullDictionary.getCharacter(character);
 
@@ -72,7 +72,7 @@ export default function Definition() {
         <main>
             <ReturnButton />
             <CharacterDefinition character={characterObject} />
-            <StrokeOrder character={characterObject} />
+            <StrokeOrder character={characterObject} logout={logout} />
         </main>
     );
 }

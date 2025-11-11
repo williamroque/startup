@@ -48,9 +48,9 @@ function InputTable({ handleChange }) {
     );
 }
 
-export default function Studio() {
+export default function Studio({ logout }) {
     const [ frame, setFrame ] = useState(new Frame());
-    const { addFrame } = useGallery();
+    const { addFrame } = useGallery(logout);
 
     const navigate = useNavigate();
     const { userDictionary, getDictionary } = useContext(UserDictionaryContext);
