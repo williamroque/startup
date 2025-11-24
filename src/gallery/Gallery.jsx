@@ -132,25 +132,11 @@ export function GalleryRow({ frame, handleDeleteFrame, hideDelete }) {
     );
 }
 
-export default function Gallery({ username, logout }) {
+export default function Gallery({ username, userVisit, logout }) {
     const { getFrames, removeFrame, frames } = useGallery(logout);
 
     useEffect(() => {
         getFrames(username);
-    }, []);
-
-    const [userVisit, setUserVisit] = useState(null);
-
-    useEffect(() => {
-        function mockUserVisit() {
-            const fakeNames = ['robbysmith', 'jenniferjohnson', 'sammywilson', 'jonathanrhodes'];
-            const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
-
-            setUserVisit(name);
-
-            setTimeout(mockUserVisit, 5000 * Math.random());
-        }
-        setTimeout(mockUserVisit, 3000);
     }, []);
 
     function handleDeleteFrame(frame) {
