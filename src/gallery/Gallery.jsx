@@ -1,6 +1,8 @@
 import './Gallery.css';
 import React, { useRef, useState, useEffect } from 'react';
 
+import Tip from '../tip/Tip';
+
 import { useGallery } from '../api/apiHooks';
 
 import closeIcon from '../assets/icons/close.svg';
@@ -150,6 +152,7 @@ export default function Gallery({ username, userVisit, logout }) {
             { userVisit ? (
                 <div id="gallery-visit-indicator"><i>{userVisit}</i> just visited your gallery.</div>
             ) : ''}
+            <Tip tipID="go-studio" />
             <section>
                 {[...frames].reverse().map((frame, index) => {
                     return <GalleryRow
