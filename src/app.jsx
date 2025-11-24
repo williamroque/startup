@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { NavLink, Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 
@@ -14,7 +14,9 @@ import Discover from './discover/Discover';
 import Visit from './visit/Visit';
 import VisitGallery from './visit/VisitGallery';
 
-import { defaultUserDictionary, fromFullDictionary, UserDictionaryContext } from './data/dictionaryData';
+import { UserDictionaryContext } from './data/dictionaryData';
+
+import { useWebSocket } from './api/webSocket';
 
 import galleryIcon from './assets/icons/gallery.svg';
 import studioIcon from './assets/icons/studio.svg';
@@ -37,6 +39,27 @@ export default function App() {
         && !pathname.startsWith('/visit-gallery')
         && pathname !== '/visit-gallery'
     );
+
+    const { announceVisit, addObserver } = useWebSocket();
+    const [ userVisit, setUserVisit ] = useState(null);
+
+    function onVisited(event, data) {
+        if (event === 'visit') {
+            const { user, otherUser } = data;
+
+            if (otherUser === username) {
+                setUserVisit(user);
+            }
+        }
+    }
+
+    useEffect(() => {
+        addObserver(onVisited);
+    }, []);
+
+    function onVisitOther(otherUser) {
+        announceVisit(username, otherUser);
+    }
 
     return (
         <UserDictionaryContext.Provider value={contextValue}>
@@ -74,12 +97,12 @@ export default function App() {
                 <Routes>
                     {authState === AuthState.Authenticated ? (
                         <>
-                            <Route path="/gallery" element={<Gallery username={username} logout={logout} />} />
+                            <Route path="/gallery" element={<Gallery username={username} userVisit={userVisit} logout={logout} />} />
                             <Route path="/studio" element={<Studio logout={logout} />} />
                             <Route path="/definition/:character" element={<Definition logout={logout} />} />
                             <Route path="/discover" element={<Discover />} />
                             <Route path="/visit" element={<Visit username={username} logout={logout} />} />
-                            <Route path="/visit-gallery/:user" element={<VisitGallery logout={logout} />} />
+                            <Route path="/visit-gallery/:user" element={<VisitGallery onVisitOther={onVisitOther} logout={logout} />} />
                         </>
                     ) : ''}
                     <Route path="/login" element={
