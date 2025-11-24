@@ -1,6 +1,7 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
+const { WebSocketServer } = require('ws');
 const uuid = require('uuid');
 
 const app = express();
@@ -178,6 +179,36 @@ function setAuthCookie(res, authToken) {
     });
 }
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
+const socketServer = new WebSocketServer({ server });
+
+socketServer.on('connection', socket => {
+    socket.isAlive = true;
+
+    socket.on('message', data => {
+        socketServer.clients.forEach(client => {
+            if (client !== socket && client.readyState === WebSocket.OPEN) {
+                client.send(data);
+            }
+        })
+    });
+
+    socket.on('pong', () => {
+        socket.isAlive = true;
+    });
+});
+
+setInterval(() => {
+    socketServer.clients.forEach(client => {
+        if (client.isAlive === false) {
+            client.terminate();
+            return;
+        }
+
+        client.isAlive = false;
+        client.ping();
+    })
+}, 10000);
