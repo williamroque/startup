@@ -1,0 +1,20 @@
+.tip-container {
+    width: 100%;
+    background-color: #D3E8F5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+    border-radius: 7px;
+    border: solid 2px #608DAB;
+    color: #608DAB;
+    gap: 25px;
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+
+.tip-close {
+    font-size: 16pt;
+    cursor: pointer;
+}

@@ -14,7 +14,10 @@ export default function Tip({ tipID }) {
     return (
         <div className="tip-container">
             <div className="tip-text">
-                {tips[tipID]}
+                <b>Tip:</b> {tips[tipID]}
+            </div>
+            <div className="tip-close">
+                ✕
             </div>
         </div>
     );
