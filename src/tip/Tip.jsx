@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './Tip.css';
 
@@ -11,12 +11,32 @@ const tips = {
 };
 
 export default function Tip({ tipID }) {
-    return (
+    const [ isHidden, setIsHidden ] = useState(true);
+
+    useEffect(() => {
+        const storedList = JSON.parse(localStorage.getItem('hidden-tips'));
+
+        if (!storedList || storedList.indexOf(tipID) === -1) {
+            setIsHidden(false);
+        }
+    }, []);
+
+    function onClick() {
+        setIsHidden(true);
+        
+        const storedList = JSON.parse(localStorage.getItem('hidden-tips')) || [];
+        localStorage.setItem(
+            'hidden-tips',
+            JSON.stringify([...storedList, tipID])
+        );
+    }
+
+    return isHidden ? '' : (
         <div className="tip-container">
             <div className="tip-text">
                 <b>Tip:</b> {tips[tipID]}
             </div>
-            <div className="tip-close">
+            <div className="tip-close" onClick={onClick}>
                 ✕
             </div>
         </div>
