@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+
 import './Visit.css';
+import Tip from '../tip/Tip';
+
 import { getUserList } from '../api/apiHooks';
 
 export default function Visit({ username, logout }) {
@@ -15,6 +18,7 @@ export default function Visit({ username, logout }) {
     return (
         <main>
             <h1>Visit</h1>
+            <Tip tipID="explain-visit" />
             <section>
                 <ul className="visit-users-list">
                     {users.filter(user => user !== username).map(user => {
