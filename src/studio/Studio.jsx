@@ -2,8 +2,11 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './Studio.css';
+
 import Dictionary from '../dictionary/Dictionary';
 import { GalleryCanvas } from '../gallery/Gallery';
+import Tip from '../tip/Tip';
+
 import { Frame } from '../data/galleryData';
 import { UserDictionaryContext } from '../data/dictionaryData';
 
@@ -67,8 +70,10 @@ export default function Studio({ logout }) {
     return (
         <main>
             <h1>Studio</h1>
+            <Tip tipID="go-discover" />
             <section>
                 <GalleryCanvas frame={frame} />
+                <Tip tipID="explain-studio" />
                 <InputTable rowCount={2} colCount={3} handleChange={handleChange} />
                 <button
                     className="studio-save-button"
