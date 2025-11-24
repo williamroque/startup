@@ -1,5 +1,8 @@
 import React from 'react';
+
 import './Dictionary.css';
+
+import Tip from '../tip/Tip';
 
 function DictionaryEntry({ character }) {
     return (
@@ -31,6 +34,7 @@ export default function Dictionary({ dictionary }) {
     return (
         <section>
             <h2>Dictionary</h2>
+            <Tip tipID="explain-dictionary" />
             <DictionaryList dictionary={dictionary} />
         </section>
     );
