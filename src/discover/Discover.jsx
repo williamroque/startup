@@ -10,6 +10,8 @@ import Dictionary from '../dictionary/Dictionary';
 import { Character } from '../data/dictionaryData';
 import { fullDictionary, UserDictionaryContext } from '../data/dictionaryData';
 
+import Tip from '../tip/Tip';
+
 import useImage from '../assets/useImage';
 
 const CanvasContext = createContext(null);
@@ -256,6 +258,7 @@ function DiscoverSection() {
                         <NewCharacter character={newCharacter} />
                     ) : ''}
                 </div>
+                <Tip tipID="explain-discover-buttons" />
                 <ControlBox
                     prediction={prediction}
                     handleCombination={handleCombination}
@@ -276,6 +279,7 @@ export default function Discover() {
     return (
         <main>
             <h1>Discover</h1>
+            <Tip tipID="explain-discover" />
             <DiscoverSection />
             <Dictionary dictionary={userDictionary} />
         </main>
