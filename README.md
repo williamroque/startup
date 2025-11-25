@@ -202,8 +202,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection**
+  - The server forwards messages to all other clients
+- [x] **Frontend makes WebSocket connection**
+  - The clients send and receive messages
+- [x] **Data sent over WebSocket connection**
+  - A "visit" event is sent, recording the user visiting and who they visit
+- [x] **WebSocket data displayed**
+  - An indicator is updated in your gallery when a user is visiting you
+- [x] **Application is fully functional**
+  - Finished app and added tips and hints to help new users learn how to play
