@@ -1,0 +1,18 @@
+.haiku-hint {
+    white-space: pre-wrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-left: solid 4px black;
+    padding: 15px 30px;
+    box-sizing: border-box;
+    font-family: 'Yuji Syuku';
+    letter-spacing: 0px;
+    margin-top: 20px;
+}
+
+.haiku-hint-character {
+    font-size: 60pt;
+    color: #979797;
+}
