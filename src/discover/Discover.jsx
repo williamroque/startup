@@ -7,10 +7,10 @@ import KanjiCanvas from '../kanjicanvas/kanji-canvas';
 import './Discover.css';
 
 import Dictionary from '../dictionary/Dictionary';
-import { Character } from '../data/dictionaryData';
 import { fullDictionary, UserDictionaryContext } from '../data/dictionaryData';
 
 import Tip from '../tip/Tip';
+import Haiku from '../tip/Haiku';
 
 import useImage from '../assets/useImage';
 
@@ -274,12 +274,13 @@ export default function Discover() {
 
     useEffect(() => {
         getDictionary();
-    });
+    }, []);
 
     return (
         <main>
             <h1>Discover</h1>
             <Tip tipID="explain-discover" />
+            <Haiku />
             <DiscoverSection />
             <Dictionary dictionary={userDictionary} />
         </main>
